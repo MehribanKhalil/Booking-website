@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1{
+  font-size: clamp(3.125rem, 1.4205rem + 9.0909vw, 9.375rem);
+}
+
+.wrapper{
+  @apply px-4 md:px-10 xl:px-16
+}
