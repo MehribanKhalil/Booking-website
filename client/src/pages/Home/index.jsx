@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import HeroSection from "../../components/homePageComponents/HeroSection";
+import TourEventsSection from "../../components/homePageComponents/TourEventsSection";
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
       </Helmet>
       <main>
         <HeroSection/>
+        <TourEventsSection/>
       </main>
     </>
   );
