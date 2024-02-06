@@ -9,10 +9,9 @@ const Home = () => {
       <Helmet>
         <title>Home</title>
       </Helmet>
-      <main>
+      
         <HeroSection/>
         <TourEventsSection/>
-      </main>
     </>
   );
 };

@@ -9,6 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import PageTitle from "@/components/commonComponents/PageTitle";
 
 const Faq = () => {
   return (
@@ -17,13 +18,10 @@ const Faq = () => {
         <title>Faq</title>
       </Helmet>
 
-      <div className="  wrapper section-space">
-        <div className=" flex justify-center flex-col items-center pb-10">
-          <h2 className=" text-4xl font-semibold pb-3">
-            Frequently asked questions
-          </h2>
-          <span className="  w-[200px] h-[2px] bg-black "></span>
-        </div>
+      <div className="Faq-page  wrapper section-space">
+        <PageTitle
+          title='Frequently asked questions'
+        />
 
         <div className="  ">
           <Accordion type="single" collapsible className="w-full ">
