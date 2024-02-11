@@ -1,11 +1,10 @@
 import { User } from "../models/userModel.js";
-import jwt from "jsonwebtoken";
-import { validateUser } from "../utils/userValidator.js";
+import asyncHandler from "express-async-handler";
+import generateToken from "../utils/generateToken.js";
 
 //USER REGISTER
-export const userRegister = async (req, res) => {
-  const { error } = validateUser(req.body);
-  const { email, firstName, lastName, photo, password } = req.body;
+export const userRegister = asyncHandler(async (req, res) => {
+  const { error } = User().validateUser(req.body);
 
   if (error) {
     return res.status(400).send(error.details[0].message);
@@ -18,26 +17,47 @@ export const userRegister = async (req, res) => {
   if (user) {
     return res
       .status(400)
-      .json({ message: " User already exists. Please sign in" });
+      .json({ message: "User already exists. Please sign in" });
   } else {
-    try {
-      const newUser = new User({
-        email,
-        firstName,
-        lastName,
-        photo,
-        password,
-      });
-      await newUser.save();
-      res.status(201).json({ newUser });
-    } catch (error) {
-      res.status(500).json({ message: error });
-    }
+    const newUser = new User({ ...req.body });
+    await newUser.save();
+    generateToken(res, newUser);
+    res.status(201).json({ newUser });
   }
-};
-
+});
 
 //USER LOGIN
-export const userLogin = async (req, res) => {
-    
-};
+export const userLogin = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email: email });
+
+  if (user && (await user.matchedPassword(password))) {
+     generateToken(res, user);
+
+    return res.status(201).json({user} );
+  } else{
+    res.status(400).json({message:'Invalid email or password'})
+  }
+});
+
+
+//USER LOGOUT
+export const userLogOut = asyncHandler(async (req, res) => {
+ res.cookie('access_token','',{
+  httpOnly:true,
+  expires: new Date(0)
+ })
+ res.status(200).json({message:'User log out'})
+});
+
+
+//GET USER
+export const getUserProfile = asyncHandler(async (req, res) => {
+  res.status(200).json({message:'User profile'})
+ });
+
+//UPDATE USER
+export const updateUserProfile = asyncHandler(async (req, res) => {
+  res.status(200).json({message:'User profile'})
+ });
+

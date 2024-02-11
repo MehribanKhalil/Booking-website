@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
  
 @layer base {
   :root {
@@ -34,7 +36,7 @@
  
     --radius: 0.5rem;
 
-    --main-color:#8B3EEA;
+    --main-color:#2d59a4;
   }
  
   .dark {
@@ -78,6 +80,8 @@
   h1{
     font-size: clamp(2.5rem, 0.625rem + 10vw, 9.375rem);
   }
+
+
   
   .wrapper{
     @apply px-4 md:px-10 xl:px-16 
@@ -85,6 +89,14 @@
 
   .section-space{
     @apply py-16 
+  }
+
+  .input-element{
+    @apply  border border-neutral-500 focus:border-mainColor bg-slate-100  focus:bg-transparent border-dashed
+  }
+
+  .input-transparent{
+    @apply  border   bg-white bg-opacity-25 hover:bg-transparent duration-300    border-transparent hover:border hover:border-white   text-white  placeholder:text-white
   }
   
 }

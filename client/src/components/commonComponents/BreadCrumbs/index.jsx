@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, NavLink, useLocation, useParams } from "react-router-dom";
+import './index.scss'
 
 const Breadcrumbs = () => {
   const { pathname } = useLocation();
@@ -18,10 +19,12 @@ const Breadcrumbs = () => {
 
   return (
     <section id="breadcrumbs">
-      <div className="banner-container bg-[url('https://andit.co/projects/html/and-tour/demo/assets/img/banner/common-banner.png')]  bg-cover h-[55vh]  flex justify-center bg-center items-center flex-col">
+      <div className="banner-container  flex justify-center bg-center items-center flex-col">
         <h2 className="breadcrumb-title text-white text-5xl  capitalize  font-semibold pb-6">
           {crumbs}
         </h2>
+        
+       
 
         <p className="breadcrumb-links flex gap-2 items-center capitalize text-white text-xl">
           <Link
@@ -33,8 +36,9 @@ const Breadcrumbs = () => {
           <span className="breadcrumb-separator flex justify-center  items-center rounded-full w-2 h-2 bg-white "></span>
           <span className="breadcrumb-current font-medium"> {crumbs}</span>
         </p>
+
+       
       </div>
-      {crumbs}
     </section>
   );
 };

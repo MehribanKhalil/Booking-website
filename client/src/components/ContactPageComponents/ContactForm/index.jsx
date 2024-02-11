@@ -3,8 +3,11 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Button from "@/components/commonComponents/Button";
 import { useForm } from "react-hook-form";
-import { validationSchema } from "@/utils/validationSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import {contactValidationSchema} from "@/utils/validationSchema";
+
+
+
 
 const ContactForm = () => {
   const {
@@ -14,7 +17,7 @@ const ContactForm = () => {
     reset,
     formState: { errors, isSubmitting, touchedFields, dirtyFields },
   } = useForm({
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(contactValidationSchema),
     defaultValues: {
       firstName: "",
       lastName: "",
@@ -32,7 +35,7 @@ const ContactForm = () => {
     reset();
   };
 
-  console.log(watch("example"));
+  // console.log(watch("example"));
 
   return (
     <div className="contact-form">
@@ -47,25 +50,25 @@ const ContactForm = () => {
         <div className=" space-y-7 pt-10">
           <div className=" flex flex-col lg:flex-row gap-6">
             <div className=" w-full">
-              <Input placeholder="First name*" {...register("firstName")} />
+              <Input className='input-element' placeholder="First name*" {...register("firstName")} />
               {errors.firstName && <p>{errors.firstName.message}</p>}
             </div>
             <div className=" w-full">
-              <Input placeholder="Last name*" {...register("lastName")} />
+              <Input className='input-element'  placeholder="Last name*" {...register("lastName")} />
               {errors.lastName && <p>{errors.lastName.message}</p>}
             </div>
           </div>
 
           <div className=" flex flex-col lg:flex-row gap-6">
             <div className="w-full">
-              <Input
+              <Input className='input-element' 
                 placeholder="Email address (Optional)"
                 {...register("email")}
               />
               {errors.email && <p>{errors.email.message}</p>}
             </div>
             <div className="w-full">
-              <Input
+              <Input className='input-element' 
                 placeholder="Mobile number*"
                 {...register("mobileNumber")}
               />

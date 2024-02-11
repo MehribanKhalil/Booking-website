@@ -29,8 +29,8 @@ const Account = () => {
           <DropdownMenuItem>
             <NavLink to={'/login'} className=' w-full'>Log in</NavLink>
           </DropdownMenuItem>
-          <DropdownMenuItem>Sign Up</DropdownMenuItem>
-          <DropdownMenuItem>Account</DropdownMenuItem>
+          <DropdownMenuItem><NavLink to={'/register'} className=' w-full'>Sign Up</NavLink></DropdownMenuItem>
+          <DropdownMenuItem ><NavLink to={'/profile'} className=' w-full'>Profile</NavLink></DropdownMenuItem>
           <DropdownMenuItem>Log out</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

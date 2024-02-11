@@ -5,12 +5,12 @@ import { CiLocationOn } from "react-icons/ci";
 
 const TourCard = () => {
   return (
-    <div className=' tour-card overflow-hidden  border border-neutral-300 rounded-2xl group'>
-      <div className=' card-img  overflow-hidden'>
+    <div className=' tour-card overflow-hidden  border  p-1 rounded-2xl group'>
+      <div className='rounded-2xl card-img  overflow-hidden'>
        <NavLink>
-       <img src="https://andit.co/projects/html/and-tour/demo/assets/img/tour/popular-2.png" 
+       <img src="https://andit.co/projects/html/and-tour/demo/assets/img/tour/popular-4.png" 
         alt="Tour"
-        className=' w-full group-hover:scale-105 duration-300'
+        className=' rounded-2xl w-full group-hover:scale-105 duration-300'
         />
        </NavLink>
       </div>

@@ -1,0 +1,33 @@
+#our-best-activites {
+  background: linear-gradient(#00000083, #000000a5),
+    url("https://images.unsplash.com/photo-1605540436563-5bca919ae766?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-position: center;
+  background-size: cover;
+
+  .swiper {
+    position: relative;
+    .swiper-slide{
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .swiper-button-next:after {
+      color: white;
+      font-size: 30px;
+      position: absolute; 
+      top: 50%;
+      left: 80%;
+    }
+
+    // .swiper-button-prev{
+    //     padding: 0px 90px;
+    // }
+    
+    .swiper-button-prev:after {
+        color: white;
+        font-size: 30px;
+        position: absolute; 
+        top: 50%;
+        right: 80%;
+      }
+  }
+}

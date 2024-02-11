@@ -18,11 +18,11 @@
         }
         li{
             transition: all .4s ease;
-            
+             font-size: 18px;
             &:hover{
                 transition: all .4s ease;
                 transform:  translateX(3px);
-                color: var(--main-color);
+                color: blue;
                 cursor: pointer;
             }
         }

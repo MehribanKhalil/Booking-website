@@ -5,18 +5,16 @@ export const validateUser = (user) => {
     email: Joi.string().email({
       minDomainSegments: 2,
       tlds: { allow: ["com", "net"] },
-    }),
+    }).trim(),
 
-    firstName: Joi.string().min(3).max(30).required(),
+    firstName: Joi.string().min(3).max(30).required().trim(),
 
-    lastName: Joi.string().min(3).max(30).required(),
+    lastName: Joi.string().min(3).max(30).required().trim(),
 
-    photo: Joi.string(),
+    photo: Joi.string().trim(),
 
-    password: Joi.string(),
+    password: Joi.string().trim(),
     // .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$"))
-
-    passwordConfirm: Joi.ref("password"),
   });
   return schema.validate(user);
 

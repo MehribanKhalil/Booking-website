@@ -1,0 +1,85 @@
+#top-destinations {
+  .destinations-container {
+    height: 300vh;
+    position: relative;
+
+    .position-sticky {
+      position: sticky;
+      top: 0px;
+      overflow: hidden;
+      height: 100vh;
+      //   background: orange;
+
+      .main-el {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .image-container {
+          width: 25vw;
+          height: 31vw;
+          position: relative;
+
+          img {
+            object-fit: cover;
+          }
+        }
+
+        &:nth-of-type(2) {
+          .image-container {
+            top: -30vh;
+            left: 5vw;
+            width: 35vw;
+            height: 30vh;
+            display: none;
+          }
+        }
+        &:nth-of-type(3) {
+          .image-container {
+            top: -15vh;
+            left: -26vw;
+            width: 20vw;
+            height: 45vh;
+          }
+        }
+        &:nth-of-type(4) {
+          .image-container {
+            left: 28.5vw;
+            width: 24vw;
+            height: 36vh;
+            bottom: 11vw;
+          }
+        }
+        &:nth-of-type(5) {
+          .image-container {
+            top: 46.5vh;
+            left: 2vw;
+            width: 23vw;
+            height: 42vh;
+          }
+        }
+        &:nth-of-type(6) {
+          .image-container {
+            top: 24.5vh;
+            left: -27.5vw;
+            width: 26vw;
+            height: 25vh;
+          }
+        }
+        &:nth-of-type(7) {
+          .image-container {
+            top: 22.5vh;
+            left: 25vw;
+            width: 15vw;
+            height: 15vh;
+          }
+        }
+      }
+    }
+  }
+}

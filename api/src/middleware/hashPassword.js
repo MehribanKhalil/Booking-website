@@ -4,7 +4,8 @@ import bcrypt from "bcrypt";
 const hashPassword = async function (next) {
   if (this.isModified("password")) {
     try {
-      const hashedPassword = await bcrypt.hash(this.password, 10);
+      const saltRounds=10
+      const hashedPassword = await bcrypt.hash(this.password,saltRounds);
       this.password = hashedPassword;
     } catch (error) {
       next(error);

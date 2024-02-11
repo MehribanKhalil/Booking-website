@@ -13,11 +13,14 @@ const Navbar = () => {
 
   const nav = () => {
     const scroll = window.scrollY;
-    scroll > 40 ? setisScroll(true) : setisScroll(false);
+    scroll > 50 ? setisScroll(true) : setisScroll(false);
   };
 
   useEffect(() => {
     window.addEventListener("scroll", nav);
+    return () => {
+      window.removeEventListener("scroll",nav);
+    };
   }, []);
 
   return (
@@ -25,12 +28,12 @@ const Navbar = () => {
       <div
         className={` ${
           isScroll
-            ? " bg-black bg-opacity-80 text-white  fixed top-0 left-0 w-full py-3  z-20"
-            : "py-4  "
-        } duration-300 flex  justify-between items-center  wrapper`}
+            ? " bg-black  bg-opacity-80    py-3  z-40  translate-y-0"
+            : "py-4   "
+        } duration-500 flex text-white  justify-between items-center fixed z-50 top-0 left-0 w-full  wrapper`}
       >
          <NavLink to={"/"}>
-        <Logo />
+        <Logo isScroll={isScroll} />
       </NavLink>
        
        <NavLinks isScroll={isScroll} />

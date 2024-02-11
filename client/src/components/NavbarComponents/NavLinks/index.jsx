@@ -7,62 +7,38 @@ const NavLinks = ({isScroll}) => {
     <ul className=" hidden lg:flex items-center gap-8 xl:gap-12">
     
     <li
-      className={` ${
-        isScroll ? " after:bg-white" : " after:bg-black"
-      } nav-item`}
+      className='after:bg-white nav-item'
     >
       <NavLink className="nav-link" to={"/"}>
         Home
       </NavLink>
     </li>
     <li
-      className={` ${
-        isScroll ? " after:bg-white" : " after:bg-black"
-      } nav-item`}
+      className='after:bg-white nav-item'
     >
       <NavLink className="nav-link" to={"/categories"}>
         Categories
       </NavLink>
     </li>
-    <li
-      className={` ${
-        isScroll ? " after:bg-white" : " after:bg-black"
-      } nav-item`}
-    >
+    <li className='after:bg-white nav-item'>
       Pages
     </li>
-    <li
-      className={` ${
-        isScroll ? " after:bg-white" : " after:bg-black"
-      } nav-item`}
-    >
+    <li className='after:bg-white nav-item'>
       <NavLink className="nav-link" to={"/dashboard"}>
         Dashboard
       </NavLink>
     </li>
-    <li
-      className={` ${
-        isScroll ? " after:bg-white" : " after:bg-black"
-      } nav-item`}
-    >
+    <li className='after:bg-white nav-item'>
       <NavLink className="nav-link" to={"/news"}>
         News
       </NavLink>
     </li>
-    <li
-      className={` ${
-        isScroll ? " after:bg-white" : " after:bg-black"
-      } nav-item`}
-    >
+    <li className='after:bg-white nav-item'>
       <NavLink className="nav-link" to={"/contact"}>
         Contact
       </NavLink>
     </li>
-    <li
-      className={` ${
-        isScroll ? " after:bg-white" : " after:bg-black"
-      } nav-item`}
-    >
+    <li className='after:bg-white nav-item'>
       <NavLink className="nav-link" to={"/faq"}>
         FAQ
       </NavLink>

@@ -1,19 +1,46 @@
 import React from "react";
-import './index.scss'
+import "./index.scss";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <footer id="footer" className="">
-      <div className="footer-top bg-[#F3F6FD] wrapper  section-space grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 ">
+      <div className="footer-top bg-[#F3F6FD] wrapper   section-space grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 ">
         <div className=" mb-3">
           <h3>Need any help?</h3>
-          <ul className="space-y-3">
-            <li>Home</li>
-            <li>About Us</li>
-            <li>Courses</li>
-            <li>News</li>
-            <li>Contact</li>
-          </ul>
+          <div className="space-y-5">
+            <div className=" border-l-2 border-mainColor px-3">
+              <div className=" space-y-2">
+                <h6 className=" font-medium">Call 24/7 for any help</h6>
+                <Link className="text-xl text-mainColor font-semibold">+00 123 456 789</Link>
+              </div>
+            </div>
+            <div className=" border-l-2 border-mainColor px-3">
+              <div>
+                <h6 className=" font-medium">Mail to our support team</h6>
+                <Link className="text-xl text-mainColor font-semibold">support@domain.com</Link>
+              </div>
+            </div>
+            <div className=" border-l-2 border-mainColor px-3">
+              <div>
+                <h6 className=" font-medium">Follow us on</h6>
+                <div className=" flex gap-2 text-mainColor text-xl">
+                  <button>
+                    <i className="fa-brands fa-square-facebook"></i>
+                  </button>
+                  <button>
+                    <i className="fa-brands fa-square-twitter"></i>
+                  </button>
+                  <button>
+                    <i className="fa-brands fa-instagram"></i>
+                  </button>
+                  <button>
+                    <i className="fa-brands fa-linkedin"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className=" mb-3">
@@ -64,7 +91,15 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <div className="footer-bottom"></div>
+      <div className="footer-bottom flex-col gap-4 items-center py-4 border-t border-gray-500 justify-center sm:flex-row flex sm:justify-between wrapper">
+        <p className=" font-medium">Copyright © 2024 All Rights Reserved</p>
+        <div>
+          <img
+            src="https://www.radiustheme.com/demo/wordpress/themes/tripfery/wp-content/uploads/2023/10/payment-image.png"
+            alt=""
+          />
+        </div>
+      </div>
     </footer>
   );
 };
