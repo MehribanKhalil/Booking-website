@@ -4,7 +4,7 @@ const baseSchema = {
   firstName: yup.string().required("First name is required"),
   lastName: yup.string().required("Last name is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
-  mobileNumber: yup.string().required("Mobile number is required"),
+  // mobileNumber: yup.string().required("Mobile number is required"),
 };
 
 //Register Validation
@@ -12,9 +12,9 @@ const baseSchema = {
     ...baseSchema,
     password: yup.string().required("Password is required"),
     userName: yup.string().required("User name is required"),
-    confirmPassword: yup.string()
-      .oneOf([yup.ref('password'), null], 'Passwords must match')
-      .required('Confirm Password is required'),
+    // confirmPassword: yup.string()
+    //   .oneOf([yup.ref('password'), null], 'Passwords must match')
+    //   .required('Confirm Password is required'),
 });
 
 //Login Validation

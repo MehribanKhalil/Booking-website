@@ -2,9 +2,10 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 import './index.scss'
 import RegisterForm from "@/components/RegisterPageComponents/RegisterForm";
+import { useQuery } from "react-query";
+import axios from "axios";
 
 const Register = () => {
-
 
   return (
     <>
@@ -14,9 +15,7 @@ const Register = () => {
 
       <div id="register-page">
         <div className="register-container">
-
           <RegisterForm/>
-
         </div>
       </div>
       

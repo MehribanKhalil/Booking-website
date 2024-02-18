@@ -18,8 +18,8 @@ const Account = () => {
       <DropdownMenu className="">
         <DropdownMenuTrigger>
           
-          <div className="  outline-none text-lg flex items-center gap-2 shadow border border-gray-300  px-3 py-2  rounded-3xl">
-            <FaBars size={16} />
+          <div className="  outline-none text-xl ">
+            {/* <FaBars size={16} /> */}
             <AccountImage />
           </div>
         </DropdownMenuTrigger>

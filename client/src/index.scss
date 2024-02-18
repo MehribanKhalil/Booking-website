@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
+
+
  
 @layer base {
   :root {
@@ -36,7 +40,7 @@
  
     --radius: 0.5rem;
 
-    --main-color:#2d59a4;
+    --main-color:#06165e;
   }
  
   .dark {
@@ -79,8 +83,13 @@
   }
   h1{
     font-size: clamp(2.5rem, 0.625rem + 10vw, 9.375rem);
+    font-family: "Arial", serif;
   }
 
+  h2,h3,h4,h5,h6{
+    font-family: "Marcellus", serif;
+
+  }
 
   
   .wrapper{
@@ -92,11 +101,16 @@
   }
 
   .input-element{
-    @apply  border border-neutral-500 focus:border-mainColor bg-slate-100  focus:bg-transparent border-dashed
+    @apply  border  outline-none border-mainColor px-6 py-3 placeholder:text-[16px]
   }
 
   .input-transparent{
     @apply  border   bg-white bg-opacity-25 hover:bg-transparent duration-300    border-transparent hover:border hover:border-white   text-white  placeholder:text-white
   }
+
+  .error-message{
+    @apply   text-red-500 text-start  text-sm py-1
+  }
+  
   
 }

@@ -3,21 +3,12 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {registerValidationSchema} from "@/utils/validationSchema";
-import { useMutation } from "react-query";
-import * as  apiClient from '../../api-client'
+import { userRegister } from "@/hooks/UseAuth";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
-
-  const mutation=useMutation(apiClient.register,{
-    onSuccess:()=>{
-      console.log("register successful")
-    },
-    onError:(error)=>{
-      console.error("Registration failed:", error.message);
-    }
-  })
-
-
+  const { mutate } = userRegister(); 
+  const nav=useNavigate()
   const {
     register,
     handleSubmit,
@@ -30,15 +21,17 @@ const RegisterForm = () => {
       firstName: "",
       lastName: "",
       email: "",
-      mobileNumber: "",
+      // mobileNumber: "",
       password: "",
       userName: "",
-      confirmPassword: "",
+      // confirmPassword: "",
     },
   });
 
   const onSubmit = (data) =>{
-    mutation.mutate(data)
+    console.log(data);
+    mutate(data);
+    nav('/')
   }
 
   return (
@@ -53,8 +46,8 @@ const RegisterForm = () => {
         <div className="space-y-5">
           <div className="flex flex-col gap-1">
             <Input
-              className=" w-[600px] input-transparent placeholder:text-white rounded-3xl"
-              placeholder="Enter first name"
+              className=" input-transparent placeholder:text-white rounded-3xl"
+              placeholder="First name"
               {...register("firstName")}
             />
             {errors.firstName && (
@@ -64,8 +57,8 @@ const RegisterForm = () => {
 
           <div className="flex flex-col gap-1">
             <Input
-              className=" w-[600px] input-transparent placeholder:text-white rounded-3xl"
-              placeholder="Enter last name"
+              className=" input-transparent placeholder:text-white rounded-3xl"
+              placeholder="Last name"
               {...register("lastName")}
             />
             {errors.lastName && (
@@ -75,8 +68,8 @@ const RegisterForm = () => {
 
           <div className="flex flex-col gap-1">
             <Input
-              className=" w-[600px] input-transparent placeholder:text-white rounded-3xl"
-              placeholder="Enter email address"
+              className=" input-transparent placeholder:text-white rounded-3xl"
+              placeholder="Email"
               {...register("email")}
             />
             {errors.email && (
@@ -84,20 +77,20 @@ const RegisterForm = () => {
             )}
           </div>
 
-          <div className="flex flex-col gap-1">
+          {/* <div className="flex flex-col gap-1">
             <Input
-              className=" w-[600px] input-transparent placeholder:text-white rounded-3xl"
+              className=" input-transparent placeholder:text-white rounded-3xl"
               placeholder="Mobile number"
               {...register("mobileNumber")}
             />
             {errors.mobileNumber && (
               <p className="text-red-500">{errors.mobileNumber.message}</p>
             )}
-          </div>
+          </div> */}
 
           <div className="flex flex-col gap-1">
             <Input
-              className=" w-[600px] input-transparent placeholder:text-white rounded-3xl"
+              className=" input-transparent placeholder:text-white rounded-3xl"
               placeholder="User name"
               {...register("userName")}
             />
@@ -108,7 +101,7 @@ const RegisterForm = () => {
 
           <div className="flex flex-col gap-1">
             <Input
-              className=" w-[600px] input-transparent placeholder:text-white rounded-3xl"
+              className=" input-transparent placeholder:text-white rounded-3xl"
               placeholder="Password"
               {...register("password")}
             />
@@ -117,16 +110,16 @@ const RegisterForm = () => {
             )}
           </div>
 
-          <div className="flex flex-col gap-1">
+          {/* <div className="flex flex-col gap-1">
             <Input
-              className=" w-[600px] input-transparent placeholder:text-white rounded-3xl"
+              className=" input-transparent placeholder:text-white rounded-3xl"
               placeholder="Confirm password"
               {...register("confirmPassword")}
             />
             {errors.confirmPassword && (
               <p className="text-red-500">{errors.confirmPassword.message}</p>
             )}
-          </div>
+          </div> */}
 
           <div>
             <button

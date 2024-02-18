@@ -21,11 +21,13 @@ const NavLinks = ({isScroll}) => {
       </NavLink>
     </li>
     <li className='after:bg-white nav-item'>
-      Pages
+    <NavLink className="nav-link" to={"/about"}>
+        About
+      </NavLink>
     </li>
     <li className='after:bg-white nav-item'>
-      <NavLink className="nav-link" to={"/dashboard"}>
-        Dashboard
+      <NavLink className="nav-link" to={"/hotels"}>
+        Hotels
       </NavLink>
     </li>
     <li className='after:bg-white nav-item'>

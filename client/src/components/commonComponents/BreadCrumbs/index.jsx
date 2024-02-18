@@ -4,6 +4,7 @@ import './index.scss'
 
 const Breadcrumbs = () => {
   const { pathname } = useLocation();
+  const {id}=useParams()
 
   const crumbs = pathname
     .split("/")

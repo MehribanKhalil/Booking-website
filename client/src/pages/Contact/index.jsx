@@ -1,5 +1,6 @@
 import ContactDetails from "@/components/ContactPageComponents/ContactDetails";
 import ContactForm from "@/components/ContactPageComponents/ContactForm";
+import ContactMap from "@/components/ContactPageComponents/ContactMap";
 import PageTitle from "@/components/commonComponents/PageTitle";
 import React from "react";
 import { Helmet } from "react-helmet-async";
@@ -10,19 +11,17 @@ const Contact = () => {
       <Helmet>
         <title>Contact</title>
       </Helmet>
-      <div id="Contact page" className=" wrapper section-space">
-        <PageTitle title="Contact with us" />
-        <h2 className=" text-2xl sm:text-4xl w-full lg:w-4/6  font-medium text-neutral-800 pb-3">
-          Do you have any query? Contact with us to get any any support.
-        </h2>
-        <div className=" flex flex-col md:flex-row gap-10 items-start">
-          <div className=" w-full md:w-4/6">
+      <div id="Contact page" className="">
+        <div className="h-[115vh] flex flex-col  lg:flex-row gap-16 items-center">
+          <div className="h-full flex py-10 px-1 justify-center items-center bg-[url('https://cozystay.loftocean.com/island-resort/wp-content/uploads/sites/3/2023/05/christian-lambert-vmIWr0NnpCQ-unsplash.jpg')] bg-cover bg-center w-full ">
             <ContactForm />
           </div>
-          <div className=" w-full md:w-2/6">
+          <div className=" w-full ">
             <ContactDetails />
           </div>
         </div>
+
+        {/* <ContactMap/> */}
       </div>
     </>
   );

@@ -13,6 +13,8 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import Profile from "./pages/Profile";
+import Hotels from "./pages/Hotels";
+import HotelsDetail from "./pages/HotelsDetail";
 
 function App() {
 
@@ -37,6 +39,8 @@ function App() {
             <Route path="/contact" element={<Contact/>} />
             <Route path="/about" element={<About/>} />
             <Route path="/profile" element={<Profile/>} />
+            <Route path="/hotels" element={<Hotels/>} />
+            <Route path="/detail/:id" element={<HotelsDetail/>} />
           </Route>
         </Routes>
       </BrowserRouter>

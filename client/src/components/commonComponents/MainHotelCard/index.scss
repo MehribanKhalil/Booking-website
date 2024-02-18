@@ -1,0 +1,138 @@
+.cols {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.col {
+    width: calc(25% - 2rem);
+    margin: 2rem;
+    cursor: pointer;
+}
+
+.container {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.front,
+.back {
+    background-size: cover;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    background-position: center;
+    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    backface-visibility: hidden;
+    text-align: center;
+    min-height: 280px;
+    min-width:240px;
+    box-shadow: 0 0 10px solid blue;
+    height: auto;
+    border-radius: 10px;
+    color: #fff;
+    // font-size: 1.5rem;
+
+    &:after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        content: '';
+        display: block;
+        opacity: .6;
+        
+        // background-color: #000;
+        backface-visibility: hidden;
+        border-radius: 10px;
+    }
+}
+
+.back {
+    background: linear-gradient(45deg, #cedce7 0%, #596a72 100%);
+}
+
+.container:hover .front,
+.container:hover .back {
+    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.inner {
+    transform: translateY(-50%) translateZ(60px) scale(0.94);
+    top: 50%;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+    outline: 1px solid transparent;
+    perspective: inherit;
+    z-index: 2;
+}
+
+.container .back {
+    transform: rotateY(180deg);
+    transform-style: preserve-3d;
+    background: var(--main-color);
+
+}
+
+.container .front {
+    transform: rotateY(0deg);
+    transform-style: preserve-3d;
+    background:linear-gradient(#00000085,#00000085), url('https://www.radiustheme.com/demo/wordpress/themes/tripfery/wp-content/uploads/2023/11/8.jpg');
+    width: 100%;
+}
+
+.container:hover .back {
+    transform: rotateY(0deg);
+    transform-style: preserve-3d;
+    background: var(--main-color);
+}
+
+.container:hover .front {
+    transform: rotateY(-180deg);
+    transform-style: preserve-3d;
+}
+
+.front .inner p {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.front .inner span {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 300;
+}
+
+@media screen and (max-width: 64rem) {
+    .col {
+        width: calc(33.333333% - 2rem);
+    }
+}
+
+@media screen and (max-width: 48rem) {
+    .col {
+        width: calc(50% - 2rem);
+    }
+}
+
+@media screen and (max-width: 32rem) {
+    .col {
+        width: 100%;
+        margin: 0 0 2rem 0;
+    }
+}
+
+
+
+

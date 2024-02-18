@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
-
+import { NavLink, useLocation } from "react-router-dom";
 
 import "./index.scss";
 import Logo from "@/components/NavbarComponents/Logo";
@@ -19,9 +18,11 @@ const Navbar = () => {
   useEffect(() => {
     window.addEventListener("scroll", nav);
     return () => {
-      window.removeEventListener("scroll",nav);
+      window.removeEventListener("scroll", nav);
     };
   }, []);
+
+  const {pathname}=useLocation()
 
   return (
     <nav id="navbar">
@@ -30,17 +31,17 @@ const Navbar = () => {
           isScroll
             ? " bg-black  bg-opacity-80    py-3  z-40  translate-y-0"
             : "py-4   "
-        } duration-500 flex text-white  justify-between items-center fixed z-50 top-0 left-0 w-full  wrapper`}
+        } duration-500 flex text-white  justify-between items-center fixed z-50 top-0 left-0 w-full  wrapper ${pathname==='profil' ? 'bg-black text-white' : ''} `}
       >
-         <NavLink to={"/"}>
-        <Logo isScroll={isScroll} />
-      </NavLink>
-       
-       <NavLinks isScroll={isScroll} />
+        <NavLink to={"/"}>
+          <Logo isScroll={isScroll} />
+        </NavLink>
 
-        <div className=" flex justify-between items-center gap-3 sm:gap-6">
-        <Search/>
-       <Account/>
+        <NavLinks isScroll={isScroll} />
+
+        <div className=" flex justify-between items-center gap-3 sm:gap-4">
+          <Search />
+          <Account />
         </div>
       </div>
     </nav>

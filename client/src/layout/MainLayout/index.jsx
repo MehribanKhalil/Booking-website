@@ -1,11 +1,13 @@
 import React from "react";
 import Navbar from "../Navbar";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useParams } from "react-router-dom";
 import Footer from "../Footer";
 import BreadCrumbs from "@/components/commonComponents/BreadCrumbs";
 
 const shouldShowBreadcrumbs = (currentPath) => {
+  const {id}=useParams()
   const excludedPaths = ["/", "/profile", "/login", "/register"];
+  // `/detail/${id}`
   return !excludedPaths.includes(currentPath);
 };
 

@@ -1,0 +1,24 @@
+#hotel-gallery{
+    .galery-container{
+        display: grid;
+        grid-template-areas: 
+        'card1 card2 card4 '
+        'card1 card3 card4 '
+         ;
+         .hotel-img1{
+            grid-area: card1;
+        }
+
+        .hotel-img2{
+            grid-area: card2;
+
+        }
+        .hotel-img3{
+            grid-area: card3;
+
+        }
+        .hotel-img4{
+            grid-area: card4;
+        }
+    }
+}

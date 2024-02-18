@@ -1,6 +1,6 @@
 import hashPassword from "../middleware/hashPassword.js";
-import { User } from "../models/userModel.js";
 import bcrypt from "bcrypt";
+import { User } from "../models/userModel/userModel.js";
 
 
 //GET ALL USERS

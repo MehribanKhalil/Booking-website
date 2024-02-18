@@ -39,32 +39,38 @@ const BlogSection = () => {
         >
           <SwiperSlide>
           <BlogCard
-          image='https://andit.co/projects/html/and-tour/demo/assets/img/home-nine/blog/blog-nine-1.png'
+          image='https://cozystay.loftocean.com/island-resort/wp-content/uploads/sites/3/2023/05/galen-crout-anPsLBVvZ_o-unsplash.jpg'
           title='Revolutionizing the travel industry, one partnership at a time'
           date='24  January'
-          readingCount='5min'
+          authorName='admin'
+          info='Join Emily as she takes you on a gastronomic adventure through the neighborhood surrounding our hotel.Join Emily as she takes you on a gastronomic adventure through the neighborhood surrounding our hotel.'
           />
           </SwiperSlide>
 
           <SwiperSlide>
           <BlogCard
-          image='https://andit.co/projects/html/and-tour/demo/assets/img/home-nine/blog/blog-nine-2.png'
+          image='https://cozystay.loftocean.com/island-resort/wp-content/uploads/sites/3/2023/05/galen-crout-anPsLBVvZ_o-unsplash.jpg'
           title='Revolutionizing the travel industry, one partnership at a time'
           date='24  January'
-          readingCount='5min'
+          authorName='admin'
+          info='Join Emily as she takes you on a gastronomic adventure through the neighborhood surrounding our hotel.Join Emily as she takes you on a gastronomic adventure through the neighborhood surrounding our hotel.'
           />
           </SwiperSlide>
 
           <SwiperSlide>
           <BlogCard
-          image='https://andit.co/projects/html/and-tour/demo/assets/img/home-nine/blog/blog-nine-3.png'
+          image='https://cozystay.loftocean.com/island-resort/wp-content/uploads/sites/3/2023/05/galen-crout-anPsLBVvZ_o-unsplash.jpg'
           title='Revolutionizing the travel industry, one partnership at a time'
           date='24  January'
-          readingCount='5min'
+          authorName='admin'
+          info='Join Emily as she takes you on a gastronomic adventure through the neighborhood surrounding our hotel.Join Emily as she takes you on a gastronomic adventure through the neighborhood surrounding our hotel.'
           />
           </SwiperSlide>
         </Swiper>
       </div>
+
+
+    
     </section>
   );
 };

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Button from "@/components/commonComponents/Button";
@@ -10,6 +11,27 @@ import {contactValidationSchema} from "@/utils/validationSchema";
 
 
 const ContactForm = () => {
+
+  const form = useRef();
+
+  const sendEmail = () => {
+    // e.preventDefault();
+
+    emailjs
+      .sendForm('service_3sjfxgs', 'template_ck2hers', form.current, {
+        publicKey: '7W2nOQet2gH7_vnUZ',
+      })
+      .then(
+        () => {
+          console.log('SUCCESS!');
+        },
+        (error) => {
+          console.log('FAILED...', error.text);
+        },
+      );
+  };
+
+
   const {
     register,
     handleSubmit,
@@ -22,66 +44,53 @@ const ContactForm = () => {
       firstName: "",
       lastName: "",
       email: "",
-      mobileNumber: "",
       message: "",
     },
   });
 
-  console.log(dirtyFields);
 
   const onSubmit = async (data) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     console.log(data);
+    sendEmail()
     reset();
   };
 
   // console.log(watch("example"));
 
   return (
-    <div className="contact-form">
-      <h3 className=" text-2xl py-4 font-semibold text-neutral-800">Leave us a message</h3>
-      <p className=" text-gray-500 text-lg">
-        Lorem ipsum dolor sit amet, cibo mundi ea duo, vim exerci phaedrum.
-        There are many variations of passages of Lorem Ipsum available but the
-        majority.
-      </p>
+    <div className="contact-form  w-full   bg-white max-w-[500px] mx-auto text-center pt-12 pb-5">
+      <p className=" text-[14px]  font-semibold text-neutral-800">CONTACT FORM</p>
+      <h2 className="  text-mainColor text-2xl pt-2 ">Let's Start A Conversation</h2>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" space-y-7 pt-10">
-          <div className=" flex flex-col lg:flex-row gap-6">
-            <div className=" w-full">
+      <form ref={form}  onSubmit={handleSubmit(onSubmit)}>
+        <div className="space-y-4  py-7 px-3 md:px-16">
+          
+
+          <div className=" w-full">
               <Input className='input-element' placeholder="First name*" {...register("firstName")} />
-              {errors.firstName && <p>{errors.firstName.message}</p>}
+              {errors.firstName && <p className="error-message">{errors.firstName.message}</p>}
             </div>
             <div className=" w-full">
               <Input className='input-element'  placeholder="Last name*" {...register("lastName")} />
-              {errors.lastName && <p>{errors.lastName.message}</p>}
+              {errors.lastName && <p className="error-message">{errors.lastName.message}</p>}
             </div>
-          </div>
 
-          <div className=" flex flex-col lg:flex-row gap-6">
+           
             <div className="w-full">
               <Input className='input-element' 
-                placeholder="Email address (Optional)"
+                placeholder="Email"
                 {...register("email")}
               />
-              {errors.email && <p>{errors.email.message}</p>}
+              {errors.email && <p className="error-message">{errors.email.message}</p>}
             </div>
-            <div className="w-full">
-              <Input className='input-element' 
-                placeholder="Mobile number*"
-                {...register("mobileNumber")}
-              />
-              {errors.mobileNumber && <p>{errors.mobileNumber.message}</p>}
-            </div>
-          </div>
 
           <div>
             <Textarea placeholder="Message" {...register("message")} />
-            {errors.message && <p>{errors.message.message}</p>}
+            {errors.message && <p className="error-message">{errors.message.message}</p>}
           </div>
 
-          <div>
+          <div className="">
             <Button type="submit">
               {isSubmitting ? "Loading..." : "Send message"}
             </Button>
