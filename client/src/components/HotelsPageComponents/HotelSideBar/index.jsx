@@ -2,8 +2,8 @@ import React from "react";
 import ReservationForm from "../ReservationForm";
 import HotelContactInfo from "../HotelContactInfo";
 import { useParams } from "react-router-dom";
-import useGetHotelDetail from "@/hooks/UseGetHotels";
 import Loader from "@/components/commonComponents/Loader";
+import { useGetHotelDetail } from "@/hooks/UseGetHotels";
 
 const HotelSideBar = ({ className }) => {
     const {id}=useParams()

@@ -1,5 +1,7 @@
 import { api } from "./api";
 
+
+//GET HOTELS
 export const getHotels = async () => {
   try {
     const response = await api.get('/hotels' );
@@ -10,7 +12,7 @@ export const getHotels = async () => {
   }
 };
 
-
+//GET HOTEL DETAIL
 export const getHotelDetail = async (id) => {
     try {
       const response = await api.get(`/hotels/${id}`);
@@ -21,3 +23,15 @@ export const getHotelDetail = async (id) => {
     }
   };
 
+
+//DELETE HOTEL
+export const deleteHotel = async (id) => {
+  try {
+    console.log(id);
+    const response = await api.delete(`/hotels/${id}`);
+    return response.data;
+  } catch (error) {
+    // console.error("Error fetching hotel:", error); 
+    throw new Error("Failed to delete hotel. Please try again later."); 
+  }
+};

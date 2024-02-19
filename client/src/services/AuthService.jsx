@@ -4,9 +4,13 @@ import { api } from "./api";
 export const authRegister = async (formData) => {
   try {
     const response = await api.post(`/auth/register`, formData );
+    if(!response.data) {
+      throw new Error("Registration failed");
+    }
     return response.data;
   } catch (error) {
-    throw new Error("Registration failed");
+    //  throw new Error("Registration failed");
+      throw error
   }
 };
 

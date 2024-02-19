@@ -1,5 +1,5 @@
 import Loader from '@/components/commonComponents/Loader';
-import useGetHotelDetail from '@/hooks/UseGetHotels';
+import { useGetHotelDetail } from '@/hooks/UseGetHotels';
 import React from 'react'
 import { useParams } from 'react-router-dom';
 

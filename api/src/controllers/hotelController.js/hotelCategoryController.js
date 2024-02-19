@@ -6,7 +6,7 @@ import cloudinary from "cloudinary";
 //GET CATEGORY
 export const getCategories = expressAsyncHandler(async (req, res) => {
   const category = await HotelCategories.find({});
-  res.status(200).json({ category });
+  res.status(200).json( category );
 });
 
 

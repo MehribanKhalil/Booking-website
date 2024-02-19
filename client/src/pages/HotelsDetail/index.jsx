@@ -2,14 +2,9 @@ import HotelAvailability from "@/components/HotelsPageComponents/HotelAvailabili
 import HotelDetailMain from "@/components/HotelsPageComponents/HotelDetailMain";
 import HotelGallery from "@/components/HotelsPageComponents/HotelGallery";
 import HotelSideBar from "@/components/HotelsPageComponents/HotelSideBar";
-import ReservationForm from "@/components/HotelsPageComponents/ReservationForm";
 import SimilarRoomsSection from "@/components/HotelsPageComponents/SimilarRoomsSection";
-import useGetHotelDetail from "@/hooks/UseGetHotels";
-import { getHotelDetail } from "@/services/HotelsService";
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { Helmet } from "react-helmet-async";
-import { useParams } from "react-router-dom";
 
 const HotelsDetail = () => {
   return (

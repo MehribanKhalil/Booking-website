@@ -4,8 +4,21 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import DestinationCard from "./DestinationCard";
+import Loader from "@/components/commonComponents/Loader";
+import { useGetCategories } from "@/hooks/UseCategories";
 
 const ChooseYourDestination = () => {
+  const { isLoading, data, error } = useGetCategories()
+  if (isLoading) {
+    return <Loader/>;
+  }
+  
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
+
+  console.log(data);
+
   return (
     <section id="your-destinations" className="bg-white section-space  relative">
       <div className=" absolute w-full h-[55%] top-0 left-0 bg-mainColor"></div>
@@ -17,7 +30,7 @@ const ChooseYourDestination = () => {
 
       <div className="tours  wrapper mt-32   ">
         <Swiper
-          slidesPerView={4}
+          slidesPerView={3}
           spaceBetween={14}
           pagination={{
             clickable: true,
@@ -36,52 +49,27 @@ const ChooseYourDestination = () => {
               slidesPerView: 3,
               spaceBetween: 40,
             },
-            1200: {
-              slidesPerView: 4,
-              spaceBetween: 50,
-            },
+            // 1200: {
+            //   slidesPerView: 4,
+            //   spaceBetween: 50,
+            // },
           }}
           className="mySwiper"
         >
-          <SwiperSlide>
-           <DestinationCard
-           categoryImage='https://cozystay.loftocean.com/island-resort/wp-content/uploads/sites/3/2023/03/img-76-683x1024.jpg'
-            categoryTitle='Beach-side'
-           />
-          </SwiperSlide>
+          {
+            data.map(category=>(
+              <SwiperSlide>
+              <DestinationCard
+              categoryImage={category.categoryImage}
+               categoryTitle={category.categoryName}
+              />
+             </SwiperSlide>
+            ))
+          }
 
-          <SwiperSlide>
-           <DestinationCard
-           categoryImage='https://cozystay.loftocean.com/island-resort/wp-content/uploads/sites/3/2023/03/img-76-683x1024.jpg'
+         
 
-            categoryTitle='Beach-side'
-           />
-          </SwiperSlide>
-
-          <SwiperSlide>
-           <DestinationCard
-           categoryImage='https://cozystay.loftocean.com/island-resort/wp-content/uploads/sites/3/2023/03/img-76-683x1024.jpg'
-
-            categoryTitle='Beach-side'
-           />
-          </SwiperSlide>
-
-          <SwiperSlide>
-           <DestinationCard
-           categoryImage='https://cozystay.loftocean.com/island-resort/wp-content/uploads/sites/3/2023/03/img-76-683x1024.jpg'
-
-            categoryTitle='Beach-side'
-           />
-          </SwiperSlide>
-
-
-          <SwiperSlide>
-           <DestinationCard
-           categoryImage='https://cozystay.loftocean.com/island-resort/wp-content/uploads/sites/3/2023/03/img-76-683x1024.jpg'
-
-            categoryTitle='Beach-side'
-           />
-          </SwiperSlide>
+         
 
           
         </Swiper>

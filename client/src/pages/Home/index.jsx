@@ -10,6 +10,7 @@ import OurBestActivites from "@/components/homePageComponents/OurBestActivites";
 import ChooseYourDestination from "@/components/homePageComponents/chooseYourDestination";
 import WelcomeToOurPage from "@/components/homePageComponents/WelcomeToOurPage";
 import MainHotelCard from "@/components/commonComponents/MainHotelCard";
+import FromOurGuests from "@/components/homePageComponents/FromOurGuests";
 
 const Home = () => {
   return (
@@ -29,7 +30,9 @@ const Home = () => {
         <ChooseYourDestination/>
         <FeedBackSection/>
         <RecommendedHotelsSection/>
-        <OurBestActivites/>
+        <FromOurGuests/>
+
+        {/* <OurBestActivites/> */}
         <TopDestinations/>
         <BlogSection/>
 

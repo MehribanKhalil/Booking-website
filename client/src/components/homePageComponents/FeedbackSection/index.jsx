@@ -11,7 +11,7 @@ import './index.scss'
 
 const FeedBackSection = () => {
   return (
-    <section id="our-feedbacks " className=" wrapper section-space">
+    <section id="our-feedbacks " className=" wrapper section-space bg-[url('https://andit.co/projects/html/and-tour/demo/assets/img/common/test-bg.png')] bg-center bg-cover">
     
     <div className="feedbacks max-w-[600px] mx-auto py-10 ">
         

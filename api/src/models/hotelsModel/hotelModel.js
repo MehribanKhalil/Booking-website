@@ -23,6 +23,7 @@ const hotelSchema = new Schema(
     phone: { type: String },
     rules: { type: Array },
     isAvaibly: { type: Boolean, default: true },
+    rooms:{ type: Number },
     facilities: [
       {
         type: Schema.Types.ObjectId,

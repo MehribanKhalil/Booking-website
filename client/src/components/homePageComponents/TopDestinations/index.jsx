@@ -71,7 +71,7 @@ const TopDestinations = () => {
     <section id="top-destinations"  className="">
         <div className="wrapper flex justify-center text-center py-4">
         <SectionTitle
-            title='Top Destinations'
+            title='Our Gallery'
             subtitle='Enjoy Your Dream'
         />
         </div>

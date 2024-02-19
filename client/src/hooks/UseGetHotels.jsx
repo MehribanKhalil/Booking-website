@@ -1,11 +1,23 @@
-import { getHotelDetail } from "@/services/HotelsService";
-import { useQuery } from "@tanstack/react-query";
+import { deleteHotel, getHotelDetail } from "@/services/HotelsService";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-const useGetHotelDetail = (hotelId) => {
+export const useGetHotelDetail = (hotelId) => {
   return useQuery({
-    queryKey: ['hotelsDetail', hotelId],
+    queryKey: ["hotelsDetail", hotelId],
     queryFn: () => getHotelDetail(hotelId),
   });
+  
 };
 
-export default useGetHotelDetail;
+export const useDeleteHotel = () => {
+  const queryClient = useQueryClient()
+  return useMutation( {
+    mutationFn: hotelId => deleteHotel(hotelId),
+    mutationKey: ["deleteHotel"],
+    onSuccess: () => {
+      queryClient.invalidateQueries(["hotels"]);
+
+    }
+
+  });
+};

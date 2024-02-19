@@ -6,7 +6,7 @@ import BlogCard from "@/components/commonComponents/BlogCard";
 
 const BlogSection = () => {
   return (
-    <section id="blog-section" className=" section-space wrapper">
+    <section id="blog-section" className=" section-space my-8 wrapper">
       <SectionTitle
         title="Get Inspirations From News and Blog"
         subtitle="Nostrud aliqua ipsum dolore velit labore nulla fugiat."
@@ -39,7 +39,7 @@ const BlogSection = () => {
         >
           <SwiperSlide>
           <BlogCard
-          image='https://cozystay.loftocean.com/island-resort/wp-content/uploads/sites/3/2023/05/galen-crout-anPsLBVvZ_o-unsplash.jpg'
+          image='https://modtel.travelerwp.com/wp-content/uploads/2022/04/wili.jpg'
           title='Revolutionizing the travel industry, one partnership at a time'
           date='24  January'
           authorName='admin'
@@ -49,7 +49,7 @@ const BlogSection = () => {
 
           <SwiperSlide>
           <BlogCard
-          image='https://cozystay.loftocean.com/island-resort/wp-content/uploads/sites/3/2023/05/galen-crout-anPsLBVvZ_o-unsplash.jpg'
+          image='https://modtel.travelerwp.com/wp-content/uploads/2022/04/wili.jpg'
           title='Revolutionizing the travel industry, one partnership at a time'
           date='24  January'
           authorName='admin'
@@ -59,7 +59,7 @@ const BlogSection = () => {
 
           <SwiperSlide>
           <BlogCard
-          image='https://cozystay.loftocean.com/island-resort/wp-content/uploads/sites/3/2023/05/galen-crout-anPsLBVvZ_o-unsplash.jpg'
+          image='https://modtel.travelerwp.com/wp-content/uploads/2022/04/wili.jpg'
           title='Revolutionizing the travel industry, one partnership at a time'
           date='24  January'
           authorName='admin'

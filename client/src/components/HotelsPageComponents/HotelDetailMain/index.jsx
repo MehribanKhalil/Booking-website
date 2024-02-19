@@ -1,14 +1,11 @@
 import React from "react";
-import { IoIosStar } from "react-icons/io";
-import { IoIosStarHalf } from "react-icons/io";
-import { IoIosStarOutline } from "react-icons/io";
 import { CiLocationOn } from "react-icons/ci";
 import RoomFacilities from "../RoomFacilities";
 import HotelRules from "../HotelRules";
-import useGetHotelDetail from "@/hooks/UseGetHotels";
 import { useParams } from "react-router-dom";
 import StarRating from "@/components/commonComponents/StartRating";
 import Loader from "@/components/commonComponents/Loader";
+import { useGetHotelDetail } from "@/hooks/UseGetHotels";
 
 
 const HotelDetailMain = ({className}) => {

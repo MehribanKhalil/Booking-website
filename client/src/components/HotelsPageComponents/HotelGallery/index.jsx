@@ -1,4 +1,4 @@
-import useGetHotelDetail from "@/hooks/UseGetHotels";
+import { useGetHotelDetail } from "@/hooks/UseGetHotels";
 import { Loader } from "lucide-react";
 import React from "react";
 import { useParams } from "react-router-dom";

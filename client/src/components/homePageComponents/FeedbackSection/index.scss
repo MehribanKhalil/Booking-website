@@ -1,14 +1,13 @@
-// .swiper {
-//     .swiper-pagination{
-//     .swiper-pagination-bullet{
-//         padding: 1px 10px;
-//         border-radius: 30%;
-//     }    
-//     } 
-//     @media screen and (max-width:600px) {
-//         .swiper-pagination{
-//          display: none;
-//         } 
-//      }
-// }
+.swiper {
+    .swiper-pagination{
+    .swiper-pagination-bullet{
+         background-color: var(--main-color);
+    }    
+    } 
+    @media screen and (max-width:600px) {
+        .swiper-pagination{
+         display: none;
+        } 
+     }
+}
 

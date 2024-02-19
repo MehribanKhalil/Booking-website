@@ -2,9 +2,9 @@ import mongoose from "mongoose";
 // import hashPassword from "../middleware/hashPassword.js";
 import Joi from "joi";
 import bcrypt from "bcrypt";
+import crypto from "crypto";
 import hashPassword from "../../middleware/hashPassword.js";
 const { Schema } = mongoose;
-
 
 const userSchema = new Schema(
   {
@@ -20,7 +20,7 @@ const userSchema = new Schema(
       minlength: 3,
       maxlength: 30,
     },
-    bookings: [{type:Schema.Types.ObjectId, ref:"Bookings"}],
+    bookings: [{ type: Schema.Types.ObjectId, ref: "Bookings" }],
     lastName: {
       type: String,
       required: [true, "Please tell us your last name!"],
@@ -32,6 +32,8 @@ const userSchema = new Schema(
     //   required: [true, "Please provide a mobile number!"],
     // },
     // image: { type: String },
+    emailVerificationToken: { type: String },
+    emailVerificationExpires: { type: Date },
     password: {
       type: String,
       required: [true, "Please provide a password!"],
@@ -43,7 +45,7 @@ const userSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ["user", "admin",'superAdmin'],
+      enum: ["user", "admin", "superAdmin"],
       required: true,
       default: "user",
     },
@@ -51,9 +53,10 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-
 const schema = Joi.object({
-  email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] },}).trim(),
+  email: Joi.string()
+    .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
+    .trim(),
   firstName: Joi.string().min(3).max(30).trim(),
   lastName: Joi.string().min(3).max(30).trim(),
   // mobileNumber: Joi.number(),
@@ -63,13 +66,11 @@ const schema = Joi.object({
   role: Joi.string().trim(),
 });
 
-  // .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$"))
-
-
+// .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$"))
 
 //Validation for new users
 userSchema.methods.validateUser = function (userObject) {
-  schema.required()
+  schema.required();
   return schema.validate(userObject);
 };
 
@@ -78,7 +79,7 @@ userSchema.statics.validateForUpdate = function (userObject) {
   return schema.validate(userObject);
 };
 
-userSchema.methods.toJSON = function() {
+userSchema.methods.toJSON = function () {
   const user = this.toObject();
 
   // delete user._id;
@@ -88,12 +89,17 @@ userSchema.methods.toJSON = function() {
   // delete user.__v;
 
   return user;
- }
+};
 
 userSchema.pre("save", hashPassword);
 
-userSchema.methods.matchedPassword= async function(enteredPassword){
-  return await bcrypt.compare(enteredPassword, this.password)
-}
+userSchema.methods.matchedPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
+
+userSchema.methods.emailVerification = function () {
+  this.emailVerificationToken = crypto.randomBytes(20).toString("hex");
+  this.emailVerificationExpires = Date.now() + 3600000; //Expires in an hour
+};
 
 export const User = mongoose.model("User", userSchema);

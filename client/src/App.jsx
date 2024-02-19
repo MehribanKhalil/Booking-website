@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Helmet, HelmetProvider } from "react-helmet-async";
+import {HelmetProvider } from "react-helmet-async";
 const helmetContext = {};
 import MainLayout from './layout/MainLayout'
 import Home from './pages/Home'
@@ -15,6 +15,10 @@ import { useEffect } from "react";
 import Profile from "./pages/Profile";
 import Hotels from "./pages/Hotels";
 import HotelsDetail from "./pages/HotelsDetail";
+import AdminLayout from "./layout/AdminLayout";
+import GetHotels from "./pages/GetHotels";
+import Admin from "./pages/Admin";
+import CreateHotels from "./pages/CreateHotels";
 
 function App() {
 
@@ -42,6 +46,11 @@ function App() {
             <Route path="/hotels" element={<Hotels/>} />
             <Route path="/detail/:id" element={<HotelsDetail/>} />
           </Route>
+          <Route element={<AdminLayout/>} >
+            <Route path="/admin/gethotels" element={<GetHotels/>} />
+            <Route path="/admin/createhotels" element={<CreateHotels/>} />
+            <Route path="/admin" element={<Admin/>} />
+          </Route>  
         </Routes>
       </BrowserRouter>
     </HelmetProvider>

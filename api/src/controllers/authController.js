@@ -4,31 +4,38 @@ import { User } from "../models/userModel/userModel.js";
 
 //USER REGISTER
 export const userRegister = asyncHandler(async (req, res) => {
-  const { email,userName, firstName, lastName, password } = req.body;
+  const { email, userName, firstName, lastName, password } = req.body;
 
-  const { error } = User().validateUser(req.body);
-  if (error) {
-    return res.status(400).send(error.details[0].message);
-  }
+  // const { error } = User().validateUser(req.body);
+  // if (error) {
+  //   return res.status(400).json(error.details[0].message);
+  // }
+
+  console.log(req.body);
+
 
   const user = await User.findOne({
     email: req.body.email,
   });
 
   if (user) {
-    return res.status(400).json({ message: "User already exists. Please sign in" });
-  } else {
-    const newUser = new User({
-      email,
-      firstName,
-      lastName,
-      userName,
-      password,
-    });
-    await newUser.save();
-    generateToken(res, newUser);
-    res.status(201).json({ newUser });
+    return res
+      .status(400)
+      .json({ message: "User already exists. Please sign in" });
   }
+  const newUser = new User({
+    email,
+    firstName,
+    lastName,
+    userName,
+    password,
+  });
+  await newUser.save();
+  // generateToken(res, newUser);
+
+  
+
+  res.status(201).json({ newUser });
 });
 
 //USER LOGIN
@@ -53,6 +60,14 @@ export const userLogOut = asyncHandler(async (req, res) => {
   });
   res.status(200).json({ message: "User log out" });
 });
+
+//VERIFY EMAIL
+export const sendVerify = asyncHandler(async (req, res) => {
+
+
+  res.status(200).json({ message: "Email sent" });
+});
+
 
 //GET USER
 export const getUserProfile = asyncHandler(async (req, res) => {

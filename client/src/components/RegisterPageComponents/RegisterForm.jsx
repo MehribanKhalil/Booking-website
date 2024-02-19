@@ -31,7 +31,7 @@ const RegisterForm = () => {
   const onSubmit = (data) =>{
     console.log(data);
     mutate(data);
-    nav('/')
+    // nav('/')
   }
 
   return (
