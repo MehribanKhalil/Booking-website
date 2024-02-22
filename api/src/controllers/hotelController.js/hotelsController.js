@@ -117,3 +117,26 @@ export const deleteHotel = expressAsyncHandler(async (req, res) => {
   }
   res.status(200).json({ message: "Hotel deleted" });
 });
+
+
+//GET HOTEL BY CATEGORY
+export const getHotelByCategory = expressAsyncHandler(async (req, res) => {
+  const { categoryId } = req.params;
+  const hotels = await Hotels.find({ category: categoryId });
+  res.status(200).json(hotels);
+})
+
+
+
+//FILTER HOTELS
+export const getAvailableHotels = expressAsyncHandler(async (req, res) => {
+  const { checkInDate, checkOutDate, rooms, guests } = req.body;
+
+  const availableHotels = await Hotels.findAvailableHotels(
+    checkInDate,
+    checkOutDate,
+    rooms,
+    guests
+  );
+  res.status(200).json(availableHotels);
+});

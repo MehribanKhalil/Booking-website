@@ -8,8 +8,9 @@ const hotelSchema = new Schema(
     description: { type: String },
     about: { type: String },
     iframeCode: { type: String },
-    childCount: { type: Number },
-    adultCount: { type: Number },
+    guests: { type: Number },
+    // childCount: { type: Number }, //childcount menadiz
+    // adultCount: { type: Number}, //adultcount menasiz
     pricePerNight: { type: Number },
     bedroomCount: { type: Number },
     bedCount: { type: Number },
@@ -22,20 +23,19 @@ const hotelSchema = new Schema(
     website: { type: String },
     phone: { type: String },
     rules: { type: Array },
-    isAvaibly: { type: Boolean, default: true },
-    rooms:{ type: Number },
+    // isRoomAvailable: { type: Boolean, default: true }, // adi deyisdim ingilisce sehv idi isAvaibli
+    rooms: { type: Number },
     facilities: [
       {
         type: Schema.Types.ObjectId,
         ref: "HotelFacilities",
       },
     ],
-    category: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "HotelCategories",
-      },
-    ],
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: "HotelCategories",
+    },
+
     services: [
       {
         type: Schema.Types.ObjectId,
@@ -48,9 +48,9 @@ const hotelSchema = new Schema(
           type: mongoose.Types.ObjectId,
           ref: "User",
         },
-        name: {type: String},
-        rating: {type: Number},
-        comment: {type: String},
+        name: { type: String },
+        rating: { type: Number },
+        comment: { type: String },
       },
     ],
   },
@@ -59,5 +59,40 @@ const hotelSchema = new Schema(
     timestamps: true,
   }
 );
+
+hotelSchema.statics.findAvailableHotels = async function (
+  checkInDate,
+  checkOutDate,
+  rooms,
+  guests
+) {
+  try {
+    const hotels = await this.find({
+      $and: [
+        { rooms: { $gte: rooms } },
+        { guests: { $gte: guests } },
+        {
+          $or: [
+            {
+              $and: [
+                { checkInDate: { $lte: checkInDate } },
+                { checkOutDate: { $gte: checkInDate } },
+              ],
+            },
+            {
+              $and: [
+                { checkInDate: { $lte: checkOutDate } },
+                { checkOutDate: { $gte: checkOutDate } },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+    return hotels;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
 
 export const Hotels = mongoose.model("Hotels", hotelSchema);

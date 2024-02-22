@@ -17,7 +17,6 @@ const ChooseYourDestination = () => {
     return <p>Error: {error.message}</p>;
   }
 
-  console.log(data);
 
   return (
     <section id="your-destinations" className="bg-white section-space  relative">

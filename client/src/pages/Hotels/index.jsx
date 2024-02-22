@@ -6,6 +6,8 @@ import OurBenefits from "@/components/commonComponents/OurBenefits";
 import { getHotels } from "@/services/HotelsService";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "@/components/commonComponents/Loader";
+import HotelsFilters from "@/components/HotelsPageComponents/HotelsFilters";
+import HotelPageMainSection from "@/components/HotelsPageComponents/HotelPageMainSection";
 
 const Hotels = () => {
   const { isLoading, data, error } = useQuery({
@@ -26,7 +28,7 @@ const Hotels = () => {
         <title>Hotels</title>
       </Helmet>
 
-      <WelcomeToOurPage
+      {/* <WelcomeToOurPage
         title="START YOUR COMFORTABLE STAY"
         subtitle="Explore our refined accommodation options and find the perfect space for your stay."
         info="The resort offers a total of 139 suites and villas and a wide range of facilities, services and activities to its guests. In an effort to provide a peaceful and tranquil environment."
@@ -44,7 +46,20 @@ const Hotels = () => {
             />
            
           </div>
-        ))}
+        ))} */}
+
+      <section className=" flex  wrapper section-space">
+        <div className=" w-1/5">
+        <HotelsFilters/>
+
+        </div>
+        <div className=" w-4/5">
+        <HotelPageMainSection/>
+
+        </div>
+      </section>
+
+
 
       <OurBenefits />
     </>

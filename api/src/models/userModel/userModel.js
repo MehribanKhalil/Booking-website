@@ -34,6 +34,7 @@ const userSchema = new Schema(
     // image: { type: String },
     emailVerificationToken: { type: String },
     emailVerificationExpires: { type: Date },
+    verified: { type: Boolean},
     password: {
       type: String,
       required: [true, "Please provide a password!"],

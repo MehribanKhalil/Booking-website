@@ -6,7 +6,7 @@ import cloudinary from "cloudinary";
 //GET FACILITY
 export const getFacility = expressAsyncHandler(async (req, res) => {
   const facility = await HotelFacilities.find({});
-  res.status(200).json({ facility });
+  res.status(200).json(facility);
 });
 
 
@@ -17,7 +17,7 @@ export const getFacilityById = expressAsyncHandler(async (req, res) => {
   if (!facility) {
     return res.status(404).json({ message: "Facility not found" });
   }
-  res.status(200).json({ facility });
+  res.status(200).json(facility );
 });
 
 
@@ -26,12 +26,12 @@ export const createFacility = expressAsyncHandler(async (req, res) => {
   const { facilityTitle } = req.body;
   const facilityImage = await cloudinary.uploader.upload(req.file.path);
 
-  const category = new HotelFacilities({
+  const facility = new HotelFacilities({
     facilityTitle,
     facilityImage: facilityImage.secure_url,
   });
-  await category.save();
-  res.status(200).json({ category });
+  await facility.save();
+  res.status(200).json({ facility });
 });
 
 

@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import {HelmetProvider } from "react-helmet-async";
+import { HelmetProvider } from "react-helmet-async";
 const helmetContext = {};
-import MainLayout from './layout/MainLayout'
-import Home from './pages/Home'
+import MainLayout from "./layout/MainLayout";
+import Home from "./pages/Home";
 import Faq from "./pages/Faq";
 import Login from "./pages/Login";
 import Contact from "./pages/Contact";
@@ -19,38 +19,38 @@ import AdminLayout from "./layout/AdminLayout";
 import GetHotels from "./pages/GetHotels";
 import Admin from "./pages/Admin";
 import CreateHotels from "./pages/CreateHotels";
+import Verify from "./pages/Verify";
 
 function App() {
-
   useEffect(() => {
     AOS.init({
-      once:true
+      once: true,
     });
     AOS.refresh();
-    
   }, []);
 
   return (
     <HelmetProvider context={helmetContext}>
       <BrowserRouter>
-      <ScrollToTop/>
+        <ScrollToTop />
         <Routes>
-          <Route element={<MainLayout/>} >
-            <Route path="/" element={<Home/>} />
-            <Route path="/login" element={<Login/>} />
-            <Route path="/register" element={<Register/>} />
-            <Route path="/faq" element={<Faq/>} />
-            <Route path="/contact" element={<Contact/>} />
-            <Route path="/about" element={<About/>} />
-            <Route path="/profile" element={<Profile/>} />
-            <Route path="/hotels" element={<Hotels/>} />
-            <Route path="/detail/:id" element={<HotelsDetail/>} />
+          <Route path="/verify" element={<Verify />} />
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/faq" element={<Faq />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/hotels" element={<Hotels />} />
+            <Route path="/detail/:id" element={<HotelsDetail />} />
           </Route>
-          <Route element={<AdminLayout/>} >
-            <Route path="/admin/gethotels" element={<GetHotels/>} />
-            <Route path="/admin/createhotels" element={<CreateHotels/>} />
-            <Route path="/admin" element={<Admin/>} />
-          </Route>  
+          <Route element={<AdminLayout />}>
+            <Route path="/admin/gethotels" element={<GetHotels />} />
+            <Route path="/admin/createhotels" element={<CreateHotels />} />
+            <Route path="/admin" element={<Admin />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </HelmetProvider>

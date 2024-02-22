@@ -13,15 +13,11 @@ export const userRegister = () => {
     onSuccess: (data) => {
       if(data) {
         console.log("Registration successful:", data);
-        toast.success("Registration successful")
-        nav('/')
+        toast.success("Verify message sent successfully")
       }
     },
     onError: (error) => {
         toast.error(error.response.data.message);
-      // console.log('user already exist');
-      // console.log("Registration error:", error.message);
-      // toast.error('slam',error.respone.data.message)
 
     }
   });

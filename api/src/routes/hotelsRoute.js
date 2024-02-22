@@ -1,6 +1,6 @@
 import express from "express";
 import multer from 'multer'
-import { createHotel, deleteHotel, getHotels, getHotelsById, updateHotel } from "../controllers/hotelController.js/hotelsController.js";
+import { createHotel, deleteHotel, getAvailableHotels, getHotelByCategory, getHotels, getHotelsById, updateHotel } from "../controllers/hotelController.js/hotelsController.js";
 import { createLocation, getLocation } from "../controllers/hotelController.js/hotelsLocationController.js";
 import { createFacility, deleteFacility, getFacility, getFacilityById, updateFacility } from "../controllers/hotelController.js/hotelFacilitiesController.js";
 import { protect } from "../middleware/authMiddleware.js";
@@ -18,6 +18,7 @@ myHotels.get('/hotels/:id',getHotelsById)
 myHotels.post('/hotels',upload.fields([{ name: 'mainImage', maxCount: 50 }, { name: 'galeryImgs', maxCount: 50 } ]),createHotel)
 myHotels.put('/hotels/:id',upload.fields([{ name: 'mainImage', maxCount: 50 }, { name: 'galeryImgs', maxCount: 50 } ]),updateHotel)
 myHotels.delete('/hotels/:id',deleteHotel)
+myHotels.get('/hotels/filter-hotel',getAvailableHotels)
 
 
 
@@ -33,6 +34,7 @@ myHotels.get('/facility/:id',getFacilityById)
 myHotels.post('/category',upload.single('categoryImage'),createCategory)
 myHotels.get('/category',getCategories)
 myHotels.get('/category/:id',getCategoryById)
+myHotels.get('/category/getHotelByCategory/:categoryId',getHotelByCategory)
 myHotels.put('/category/:id',upload.single('categoryImage'),updateCategory)
 myHotels.delete('/category/:id',deleteCategory)
 

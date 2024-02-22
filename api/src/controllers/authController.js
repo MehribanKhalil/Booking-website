@@ -1,42 +1,104 @@
 import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import { User } from "../models/userModel/userModel.js";
+import sendMail from "../utils/sendEmail.js";
+
+export const authWithGoogle = async (req, res) => {
+  try {
+    const { tokens } = await oauth2Client.getToken(req.query.code);
+    oauth2Client.setCredentials(tokens);
+    const people = google.people({ version: "v1", auth: oauth2Client });
+    const me = await people.people.get({
+      resourceName: "people/me",
+      personFields: "emailAddresses,names,photos",
+    });
+
+    console.log("MEEEEEEEEEEEEEEEEEE", me);
+
+    let user = await User.findOne({
+      email: me.data.emailAddresses[0].value,
+    });
+    if (!user) {
+      const avatarUrl = me.data.photos[0]
+        ? me.data.photos.url
+        : "default-avatar-url";
+      user = new User({
+        avatar: avatarUrl,
+        firstName: me.data.names[0].givenName,
+        lastName: me.data.names[0].familyName || " ",
+        username: `${me.data.names[0].givenName}${
+          me.data.names[0].familyName || " "
+        }`,
+        email: me.data.emailAddresses[0].value,
+        password: crypto.randomBytes(20).toString("hex"),
+        googleId: me.data.resourceName.split("/")[1],
+        verified: true,
+      });
+      await user.save();
+    }
+
+    generateToken(user);
+
+    res.redirect(process.env.CLIENT_URL);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getOauth = async (req, res) => {
+  try {
+    const url = oauth2Client.generateAuthUrl({
+      access_type: "offline",
+      scope: ["profile", "email"],
+    });
+    res.json({ url });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 //USER REGISTER
-export const userRegister = asyncHandler(async (req, res) => {
-  const { email, userName, firstName, lastName, password } = req.body;
+export const userRegister = async (req, res) => {
+  try {
+    const { email, userName, firstName, lastName, password } = req.body;
 
-  // const { error } = User().validateUser(req.body);
-  // if (error) {
-  //   return res.status(400).json(error.details[0].message);
-  // }
+    // const { error } = User().validateUser(req.body);
+    // if (error) {
+    //   return res.status(400).json(error.details[0].message);
+    // }
 
-  console.log(req.body);
+    console.log(req.body);
 
+    const user = await User.findOne({
+      email,
+    });
 
-  const user = await User.findOne({
-    email: req.body.email,
-  });
+    if (user) {
+      return res
+        .status(400)
+        .json({ message: "User already exists. Please sign in" });
+    }
+    const newUser = new User({
+      email,
+      firstName,
+      lastName,
+      userName,
+      password,
+    });
 
-  if (user) {
-    return res
-      .status(400)
-      .json({ message: "User already exists. Please sign in" });
+    newUser.emailVerification();
+    await newUser.save();
+
+    const emailText = `Please click the following link to verify your email: 
+   ${process.env.CLIENT_URL}/verify?token=${newUser.emailVerificationToken}`;
+
+    await sendMail(newUser.email, "Please verify your email", emailText);
+
+    res.status(201).json({ message: "Please verify your email" });
+  } catch (error) {
+    console.log(error);
   }
-  const newUser = new User({
-    email,
-    firstName,
-    lastName,
-    userName,
-    password,
-  });
-  await newUser.save();
-  // generateToken(res, newUser);
-
-  
-
-  res.status(201).json({ newUser });
-});
+};
 
 //USER LOGIN
 export const userLogin = asyncHandler(async (req, res) => {
@@ -63,11 +125,21 @@ export const userLogOut = asyncHandler(async (req, res) => {
 
 //VERIFY EMAIL
 export const sendVerify = asyncHandler(async (req, res) => {
+  const { token } = req.query;
+  const user = await User.findOne({
+    emailVerificationToken: token,
+  });
+  if (!user) {
+    return res.status(400).json({ error: "User not found" });
+  }
+  user.verified = true;
+  user.emailVerificationToken = undefined;
 
+  generateToken(res, user);
 
-  res.status(200).json({ message: "Email sent" });
+  await user.save();
+  res.status(200).json({ message: "Account confirmed" });
 });
-
 
 //GET USER
 export const getUserProfile = asyncHandler(async (req, res) => {

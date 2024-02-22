@@ -3,11 +3,10 @@ import Navbar from "../Navbar";
 import { Outlet, useLocation, useParams } from "react-router-dom";
 import Footer from "../Footer";
 import BreadCrumbs from "@/components/commonComponents/BreadCrumbs";
-import { Toaster } from "@/components/ui/sonner"
-
+import { Toaster } from "@/components/ui/sonner";
 
 const shouldShowBreadcrumbs = (currentPath) => {
-  const {id}=useParams()
+  const { id } = useParams();
   const excludedPaths = ["/", "/profile", "/login", "/register"];
   // `/detail/${id}`
   return !excludedPaths.includes(currentPath);
@@ -22,9 +21,9 @@ const MainLayout = () => {
       {shouldShowBreadcrumbs(currentPath) && <BreadCrumbs />}
       <main>
         <Outlet />
-        <Toaster />
       </main>
-      
+      <Toaster />
+
       <Footer />
     </>
   );
