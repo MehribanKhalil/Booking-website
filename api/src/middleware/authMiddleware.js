@@ -23,7 +23,21 @@ const protect= asyncHandler(async(req,res,next)=>{
     }
 })
 
-export {protect}
+
+const isAdmin = async (req, res, next) => {
+    if (req.user && (req.user.role === 'admin' || req.user.role === 'superAdmin')) {
+        next();
+    } else {
+        res.status(403);
+        throw new Error('Not authorized, only admin users allowed');
+    }
+};
+
+
+export {protect, isAdmin}
+
+
+
 
 
 

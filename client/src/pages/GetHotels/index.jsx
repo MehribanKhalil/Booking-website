@@ -104,10 +104,11 @@ const GetHotels = () => {
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
                         <div className=" space-x-3">
-                          <button>
+                          <button className=" p-2">
                             <FaRegEye size={20} />
                           </button>
                           <button
+                          className=" p-2"
                             onClick={() => handleDelete(hotel._id)}
                           >
                             <IoMdTrash size={20} />

@@ -49,11 +49,9 @@ const Faq = () => {
         <title>Faq</title>
       </Helmet>
 
-      <div className="Faq-page  wrapper section-space">
-
-        <div className=" mt-1  flex flex-col md:flex-row bg-no-repeat  bg-cover bg-center p-10 gap-10 rounded-xl ">
-
-        <div className="">
+      <div className="Faq-page  wrapper section-space  bg-[url('https://jannataresort.com/_nuxt/img/a109df5.png)']">
+        <div className="  mt-1  flex flex-col md:flex-row bg-no-repeat  bg-cover bg-center p-10 gap-10 rounded-xl ">
+          <div className="">
             <img
               src="https://images.unsplash.com/photo-1542931287-023b922fa89b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHRva3lvfGVufDB8fDB8fHww"
               className=" w-[900px]"
@@ -62,13 +60,10 @@ const Faq = () => {
           </div>
 
           <Accordion type="single" collapsible className="w-full ">
-        <PageTitle title="Frequently asked questions" />
+            <PageTitle title="Frequently asked questions" />
 
             {faqQuestions.map((item) => (
-              <AccordionItem
-                value={item.id}
-                className="  px-6 my-6"
-              >
+              <AccordionItem value={item.id} className="  px-6 my-6">
                 <AccordionTrigger className=" text-lg ">
                   {item.triggerText}
                 </AccordionTrigger>
@@ -78,8 +73,6 @@ const Faq = () => {
               </AccordionItem>
             ))}
           </Accordion>
-
-         
         </div>
       </div>
     </>

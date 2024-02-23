@@ -7,7 +7,7 @@ import { Toaster } from "@/components/ui/sonner";
 
 const shouldShowBreadcrumbs = (currentPath) => {
   const { id } = useParams();
-  const excludedPaths = ["/", "/profile", "/login", "/register"];
+  const excludedPaths = ["/", "/profile", "/login", "/register",`/detail/${id}`];
   // `/detail/${id}`
   return !excludedPaths.includes(currentPath);
 };

@@ -16,8 +16,6 @@ export const useDeleteHotel = () => {
     mutationKey: ["deleteHotel"],
     onSuccess: () => {
       queryClient.invalidateQueries(["hotels"]);
-
     }
-
   });
 };

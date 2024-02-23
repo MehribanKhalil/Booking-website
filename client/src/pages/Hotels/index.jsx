@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loader from "@/components/commonComponents/Loader";
 import HotelsFilters from "@/components/HotelsPageComponents/HotelsFilters";
 import HotelPageMainSection from "@/components/HotelsPageComponents/HotelPageMainSection";
+import HeaderSearch from "@/components/HotelsPageComponents/HeaderSearch";
 
 const Hotels = () => {
   const { isLoading, data, error } = useQuery({
@@ -48,8 +49,10 @@ const Hotels = () => {
           </div>
         ))} */}
 
-      <section className=" flex  wrapper section-space">
-        <div className=" w-1/5">
+      <HeaderSearch/>
+
+      <section className=" flex  wrapper  pb-24  pt-28">
+        <div className=" min-w-1/5">
         <HotelsFilters/>
 
         </div>

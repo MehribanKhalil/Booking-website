@@ -6,9 +6,12 @@ import Logo from "@/components/NavbarComponents/Logo";
 import Account from "@/components/NavbarComponents/Account";
 import Search from "@/components/NavbarComponents/Search";
 import NavLinks from "@/components/NavbarComponents/NavLinks";
+import Hamburger from 'hamburger-react'
+
 
 const Navbar = () => {
   const [isScroll, setisScroll] = useState(false);
+  const [isOpen, setOpen] = useState(false)
 
   const nav = () => {
     const scroll = window.scrollY;
@@ -29,9 +32,9 @@ const Navbar = () => {
       <div
         className={` ${
           isScroll
-            ? " bg-black  bg-opacity-80    py-3  z-40  translate-y-0"
+            ? " bg-mainColor  bg-opacity-80    py-3  z-40  translate-y-0"
             : "py-4   "
-        } duration-500 flex text-white  justify-between items-center fixed z-50 top-0 left-0 w-full  wrapper ${pathname==='profil' ? 'bg-black text-white' : ''} `}
+        } duration-500 flex text-white  justify-between items-center fixed z-50 top-0 left-0 w-full  wrapper ${pathname==='profil' ? ' bg-mainColor text-white' : ''} `}
       >
         <NavLink to={"/"}>
           <Logo isScroll={isScroll} />
@@ -39,10 +42,14 @@ const Navbar = () => {
 
         <NavLinks isScroll={isScroll} />
 
-        <div className=" flex justify-between items-center gap-3 sm:gap-4">
-          <Search />
+        <div className=" flex justify-between items-center gap-3">
+          {/* <Search /> */}
           <Account />
+          <div className=" md:hidden">
+        <Hamburger size={23} />
         </div>
+        </div>
+        
       </div>
     </nav>
   );

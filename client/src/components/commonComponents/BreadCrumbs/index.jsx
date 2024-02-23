@@ -20,7 +20,7 @@ const Breadcrumbs = () => {
 
   return (
     <section id="breadcrumbs">
-      <div className="banner-container  flex justify-center bg-center items-center flex-col">
+      <div className={`banner-container   flex justify-center bg-center items-center flex-col ${pathname==='/hotels' ? "h-[65vh]" : "h-[50vh]"}`}>
         <h2 className="breadcrumb-title text-white text-5xl  capitalize  font-semibold pb-6">
           {crumbs}
         </h2>

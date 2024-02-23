@@ -11,13 +11,13 @@ const StarRatingFilter = () => {
   };
 
   return (
-    <div className="category-filter  border border-gray-400  rounded-lg">
+    <div className="category-filter  border border-mainColor  rounded-lg">
       <div
         className="filter-title cursor-pointer"
         onClick={() => toggleContent()}
       >
         <h5
-          className={`border-b pb-3 mx-5 border-b-gray-300 px-4 pt-7  font-semibold flex justify-between items-center ${
+          className={`border-b pb-3 mx-5 border-b-mainColor px-4 pt-7  font-semibold flex justify-between items-center ${
             isOpen ? "" : " pb-7"
           }`}
         >

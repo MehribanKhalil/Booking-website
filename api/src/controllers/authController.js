@@ -148,5 +148,24 @@ export const getUserProfile = asyncHandler(async (req, res) => {
 
 //UPDATE USER
 export const updateUserProfile = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: "User profile" });
+  const { error } = User.validateForUpdate(req.body);
+
+  if (error) {
+    return res.status(400).send(error.details[0].message);
+  }
+  const { id } = req.params;
+
+  if (req.body.hasOwnProperty("password")) {
+    req.body.password = await bcrypt.hash(req.body.password, 10);
+  }
+
+  const updateUser = await User.findByIdAndUpdate(
+    id,
+    { ...req.body },
+    { new: true, runValidators: true }
+  );
+  if (!updateUser) {
+    res.status(400).json({ error: "User not found" });
+  }
+  res.status(200).json({ updateUser });
 });

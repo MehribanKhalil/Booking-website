@@ -15,13 +15,13 @@ const HotelSearchByName = () => {
  
 
   return (
-    <div className="category-filter   border border-gray-400  rounded-lg">
+    <div className="category-filter    border   border-mainColor  rounded-lg">
       <div
         className="filter-title cursor-pointer"
         onClick={() => toggleContent()}
       >
         <h5
-          className={`border-b  pb-3 mx-5 border-b-gray-300 px-4 pt-7  font-semibold flex justify-between items-center${
+          className={`border-b  pb-3 mx-5 border-b-mainColor px-4 pt-7  font-semibold flex justify-between items-center${
             isOpen ? "" : " pb-7"
           }`}
         >
@@ -37,8 +37,8 @@ const HotelSearchByName = () => {
         }`}
       >
       <div className="space-y-2 text-lg px-2 flex justify-center items-center text-gray-600 border border-gray-200 mx-2 my-3 ">
-        <input type="text" name="" id="" placeholder="e.g Palazzo"  className=" py-2 px-3 outline-none" />
-        <BiSearchAlt  />
+        <input type="text" name="" id="" placeholder="e.g Palazzo"  className=" py-2  outline-none " />
+        <BiSearchAlt className=" min-w-3"  />
       </div>
       </div>
     </div>

@@ -9,6 +9,7 @@ const AdminHotelDetail = () => {
       </Helmet>
 
       
+      
     </>
   );
 };

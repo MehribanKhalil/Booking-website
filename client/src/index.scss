@@ -7,6 +7,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
 
 
+/* width */
+::-webkit-scrollbar {
+  width: 11px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #eee; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--main-color); 
+  border-radius: 5px;
+}
+
+
+
  
 @layer base {
   :root {
@@ -41,6 +59,7 @@
     --radius: 0.5rem;
 
     --main-color:#06165e;
+    --light-blue:#0071c2;
   }
  
   .dark {

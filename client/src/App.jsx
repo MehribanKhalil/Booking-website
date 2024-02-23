@@ -20,6 +20,10 @@ import GetHotels from "./pages/GetHotels";
 import Admin from "./pages/Admin";
 import CreateHotels from "./pages/CreateHotels";
 import Verify from "./pages/Verify";
+import AdminPageCategories from "./pages/AdminPageCategories";
+import NotFound from "./pages/NotFound";
+import News from "./pages/News";
+import AdminFacilities from "./pages/AdminFacilities";
 
 function App() {
   useEffect(() => {
@@ -43,6 +47,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/news" element={<News />} />
             <Route path="/hotels" element={<Hotels />} />
             <Route path="/detail/:id" element={<HotelsDetail />} />
           </Route>
@@ -50,7 +55,10 @@ function App() {
             <Route path="/admin/gethotels" element={<GetHotels />} />
             <Route path="/admin/createhotels" element={<CreateHotels />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/categories" element={<AdminPageCategories />} />
+            <Route path="/admin/facilities" element={<AdminFacilities />} />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </HelmetProvider>
