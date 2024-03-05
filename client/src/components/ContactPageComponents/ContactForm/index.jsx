@@ -6,6 +6,7 @@ import Button from "@/components/commonComponents/Button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {contactValidationSchema} from "@/utils/validationSchema";
+import { toast } from 'sonner';
 
 
 
@@ -53,13 +54,12 @@ const ContactForm = () => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     console.log(data);
     sendEmail()
+    toast.success("Message sent successfully")
     reset();
   };
 
-  // console.log(watch("example"));
-
   return (
-    <div className="contact-form  w-full   bg-white max-w-[500px] mx-auto text-center pt-12 pb-5">
+    <div className="contact-form  w-full shadow-[0_8px_30px_rgb(0,0,0,0.12)]   bg-white max-w-[500px] mx-auto text-center pt-12 pb-5">
       <p className=" text-[14px]  font-semibold text-neutral-800">CONTACT FORM</p>
       <h2 className="  text-mainColor text-2xl pt-2 ">Let's Start A Conversation</h2>
 
@@ -68,11 +68,11 @@ const ContactForm = () => {
           
 
           <div className=" w-full">
-              <Input className='input-element' placeholder="First name*" {...register("firstName")} />
+              <Input className='input-element' placeholder="First name" {...register("firstName")} />
               {errors.firstName && <p className="error-message">{errors.firstName.message}</p>}
             </div>
             <div className=" w-full">
-              <Input className='input-element'  placeholder="Last name*" {...register("lastName")} />
+              <Input className='input-element'  placeholder="Last name" {...register("lastName")} />
               {errors.lastName && <p className="error-message">{errors.lastName.message}</p>}
             </div>
 

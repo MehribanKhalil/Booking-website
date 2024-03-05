@@ -11,7 +11,6 @@ const sendMail = async (to, subject, text) => {
     },
   });
 
-  console.log("SA", transport);
   const mailOptions = {
     from: process.env.EMAIL,
     to,

@@ -56,7 +56,7 @@ const ChooseYourDestination = () => {
           className="mySwiper"
         >
           {
-            data.map(category=>(
+            data?.map(category=>(
               <SwiperSlide>
               <DestinationCard
               categoryImage={category.categoryImage}

@@ -4,59 +4,53 @@ import { User } from "../../models/userModel/userModel.js";
 import { Hotels } from "../../models/hotelsModel/hotelModel.js";
 import { ExtraServices } from "../../models/hotelsModel/extraServicesModel.js";
 
+function calculateDaysOfStay(checkInDate, checkOutDate) {
+  const millisecondsPerDay = 1000 * 60 * 60 * 24;
+  const checkIn = new Date(checkInDate);
+  const checkOut = new Date(checkOutDate);
+  const timeDifference = checkOut.getTime() - checkIn.getTime();
+  return Math.round(timeDifference / millisecondsPerDay);
+}
+
 //CREATE BOOKING
 export const addBookings = expressAsyncHandler(async (req, res) => {
-  //const { userId } = req.user middlewareden
-  //   const { hotelId, checkInDate, userId, checkOutDate } = req.body;
   const userId = req.user._id;
-  console.log(req.body);
   const {
     hotelId,
-    // serviceIds,
-    // serviceQuantity,
     adultsCounts,
+    services,
     childCounts,
     checkInDate,
     checkOutDate,
     amountPaid,
   } = req.body;
 
+  console.log("booking", req.body);
+
+  const foundServices = await ExtraServices.find({ _id: { $in: services } });
+
   const findRoom = await Hotels.findById(hotelId);
   const findUser = await User.findById(userId);
-
-  // const totalGuests = adultsCounts + childCounts;
-  // const totalServices = serviceQuantity.reduce(
-  //   (total, quantity) => total + quantity,
-  //   0
-  // );
-
-  // if (totalServices > totalGuests) {
-  //   return res
-  //     .status(400)
-  //     .json({ message: "Total services cannot exceed total guests" });
-  // }
-
-  // const newServices = serviceIds.map((serviceId, index) => ({
-  //   serviceId,
-  //   quantity: serviceQuantity[index],
-  // }));
 
   if (!findUser) return res.status(404).json({ message: "User not found" });
   if (!findRoom) return res.status(404).json({ message: "Room not found" });
 
+  if (!checkInDate || !checkOutDate) {
+    return res.status(400).json({
+      message: "You have to choose start date and end date for reservation",
+    });
+  }
+
   if (checkInDate <= Date.now()) {
     return res
       .status(400)
-      .json({ message: "Start date must be after now date" });
+      .json({ message: "Start date must be after current date" });
   }
 
   if (checkInDate >= checkOutDate)
     return res
       .status(400)
       .json({ message: "Start date must be before end date" });
-
-  // if (!findRoom.isRoomAvailable)
-  //   return res.status(404).json({ message: "This room is reserved" });
 
   const isRoomAvailable = await Bookings.findOne({
     hotelId: hotelId,
@@ -85,32 +79,22 @@ export const addBookings = expressAsyncHandler(async (req, res) => {
       .json({ message: "This room is already booked for the specified dates" });
   }
 
-  const checkIn = new Date(checkInDate);
-  const checkOut = new Date(checkOutDate);
-  const millisecondsPerDay = 1000 * 60 * 60 * 24;
-  const timeDifference = checkOut.getTime() - checkIn.getTime();
-
-  const daysOfStay = Math.round(timeDifference / millisecondsPerDay);
+  console.log(calculateDaysOfStay(checkInDate, checkOutDate));
 
   const newBooking = new Bookings({
     user: userId,
-    // services: newServices,
     hotelId: hotelId,
+    services: foundServices.map((findService) => findService._id),
     checkInDate,
     checkOutDate,
     amountPaid,
-    daysOfStay,
+    daysOfStay: calculateDaysOfStay(checkInDate, checkOutDate),
     paidAt: Date.now(),
   });
 
   const savedBookings = await newBooking.save();
 
-  // findRoom.isRoomAvailable = false;
-
-  //   if (findUser.bookings.includes(savedBookings._id)) {
-  //     res.status(400).json({ message: "You already booked" });
-  //   }
-  //   findUser.bookings.push(newBooking._id);
+  findUser.bookings.push(savedBookings._id);
 
   await findRoom.save();
   await findUser.save();
@@ -120,29 +104,36 @@ export const addBookings = expressAsyncHandler(async (req, res) => {
 //GET BOOKING
 export const getHotelBookings = expressAsyncHandler(async (req, res) => {
   const { hotelId } = req.params;
-  const findHotel = await Bookings.find({ hotelId: hotelId });
+  const findHotel = await Bookings.find({ hotelId: hotelId }).populate(
+    "hotelId"
+  );
   if (!findHotel) return res.status(404).json({ message: "Not found booking" });
 
   res.status(200).json(findHotel);
 });
 
-//GET SIMILAR HOTELS BY CATEGORY
-export const getSimiralHotels = expressAsyncHandler(async (req, res) => {
-  const { hotelId } = req.params;
+export const getAvalibilityHotels = expressAsyncHandler(async (req, res) => {
+  const { guests, checkIn, location, checkOut } = req.query;
 
-  const findHotel = await Hotels.findById(hotelId);
-  if (!findHotel) return res.status(404).json({ message: "Not found booking" });
+  const checkInDate = new Date(checkIn);
+  const checkOutDate = new Date(checkOut);
 
-  const categoryIds = findHotel.category.map((category) => category._id);
-
-  const findHotels = await Hotels.find({
-    _id: { $ne: hotelId },
-    category: { $in: categoryIds },
+  const overlappingBookings = await Bookings.find({
+    checkInDate: { $lt: checkOutDate },
+    checkOutDate: { $gt: checkInDate },
   });
 
-  res.status(200).json(findHotels);
+  const bookedHotelIds = overlappingBookings.map((booking) => booking.hotelId);
+
+  const availableHotels = await Hotels.find({
+    guests: { $gte: guests },
+    _id: { $nin: bookedHotelIds },
+  });
+
+  res.json(availableHotels);
 });
 
+//UPDATE BOOKINGS
 export const updateBookings = expressAsyncHandler(async (req, res) => {
   const { bookingId } = req.params;
   const { checkInDate, userId, checkOutDate, roomId } = req.body;
@@ -158,4 +149,21 @@ export const updateBookings = expressAsyncHandler(async (req, res) => {
   findBooking.room = roomId;
 });
 
+//GET SIMILAR HOTELS BY CATEGORY
+export const getSimiralHotels = expressAsyncHandler(async (req, res) => {
+  const { hotelId } = req.params;
+  console.log(hotelId);
 
+  const findHotel = await Hotels.findById(hotelId);
+  if (!findHotel) return res.status(404).json({ message: "Hotel not found" });
+
+  const categoryId = findHotel.category;
+  console.log("categoryId", categoryId);
+
+  const findHotels = await Hotels.find({
+    _id: { $ne: hotelId },
+    category: { $in: categoryId },
+  });
+
+  res.status(200).json(findHotels);
+});

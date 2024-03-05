@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {registerValidationSchema} from "@/utils/validationSchema";
 import { userRegister } from "@/hooks/UseAuth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { FaRegEye } from "react-icons/fa";
+import { FaRegEyeSlash } from "react-icons/fa";
+
 
 const RegisterForm = () => {
+  const [passwordSeen, setPasswordSeen] = useState(false)
   const { mutate } = userRegister(); 
   const nav=useNavigate()
   const {
@@ -28,9 +32,14 @@ const RegisterForm = () => {
     },
   });
 
+  const handlePasswordSeen=()=>{
+    setPasswordSeen(!passwordSeen)
+  }
+
   const onSubmit = (data) =>{
     console.log(data);
     mutate(data);
+    reset()
     // nav('/')
   }
 
@@ -43,10 +52,10 @@ const RegisterForm = () => {
           Register your account
         </h2>
 
-        <div className="space-y-5">
+        <div className="space-y-5 max-w-[280px] sm:max-w-[500px]">
           <div className="flex flex-col gap-1">
             <Input
-              className=" input-transparent placeholder:text-white rounded-3xl"
+              className=" bg-white bg-opacity-25 hover:bg-transparent  duration-300 rounded-full   border-transparent hover:border hover:border-white  w-[280px] mx-auto sm:w-[500px]   text-white  placeholder:text-white"
               placeholder="First name"
               {...register("firstName")}
             />
@@ -57,7 +66,7 @@ const RegisterForm = () => {
 
           <div className="flex flex-col gap-1">
             <Input
-              className=" input-transparent placeholder:text-white rounded-3xl"
+              className="bg-white bg-opacity-25 hover:bg-transparent  duration-300 rounded-full   border-transparent hover:border hover:border-white  w-[280px] mx-auto sm:w-[500px]  text-white  placeholder:text-white"
               placeholder="Last name"
               {...register("lastName")}
             />
@@ -68,7 +77,7 @@ const RegisterForm = () => {
 
           <div className="flex flex-col gap-1">
             <Input
-              className=" input-transparent placeholder:text-white rounded-3xl"
+              className="bg-white bg-opacity-25 hover:bg-transparent  duration-300 rounded-full   border-transparent hover:border hover:border-white  w-[280px] mx-auto sm:w-[500px]  text-white  placeholder:text-white"
               placeholder="Email"
               {...register("email")}
             />
@@ -79,7 +88,7 @@ const RegisterForm = () => {
 
           {/* <div className="flex flex-col gap-1">
             <Input
-              className=" input-transparent placeholder:text-white rounded-3xl"
+              className="bg-white bg-opacity-25 hover:bg-transparent  duration-300 rounded-full   border-transparent hover:border hover:border-white   text-white  placeholder:text-white"
               placeholder="Mobile number"
               {...register("mobileNumber")}
             />
@@ -90,7 +99,7 @@ const RegisterForm = () => {
 
           <div className="flex flex-col gap-1">
             <Input
-              className=" input-transparent placeholder:text-white rounded-3xl"
+              className="bg-white bg-opacity-25 hover:bg-transparent  duration-300 rounded-full   border-transparent hover:border hover:border-white  w-[280px] mx-auto sm:w-[500px]  text-white  placeholder:text-white "
               placeholder="User name"
               {...register("userName")}
             />
@@ -100,11 +109,20 @@ const RegisterForm = () => {
           </div>
 
           <div className="flex flex-col gap-1">
-            <Input
-              className=" input-transparent placeholder:text-white rounded-3xl"
+           <div className="bg-white bg-opacity-25 hover:bg-transparent  duration-300 rounded-full   border-transparent hover:border hover:border-white  w-[280px] mx-auto sm:w-[500px]  text-white   flex pr-3">
+           <Input
+              className=" border-none outline-none bg-transparent placeholder:text-white"
               placeholder="Password"
+              type={ passwordSeen ? 'text': 'password'}
               {...register("password")}
+              
             />
+            <button type="button" onClick={handlePasswordSeen}>
+              {
+                passwordSeen ?  <FaRegEye size={20} />  : <FaRegEyeSlash size={20} />
+              }
+            </button>
+           </div>
             {errors.password && (
               <p className="text-red-500">{errors.password.message}</p>
             )}
@@ -112,7 +130,7 @@ const RegisterForm = () => {
 
           {/* <div className="flex flex-col gap-1">
             <Input
-              className=" input-transparent placeholder:text-white rounded-3xl"
+              className="bg-white bg-opacity-25 hover:bg-transparent  duration-300 rounded-full   border-transparent hover:border hover:border-white   text-white  placeholder:text-white"
               placeholder="Confirm password"
               {...register("confirmPassword")}
             />
@@ -123,7 +141,7 @@ const RegisterForm = () => {
 
           <div>
             <button
-              className="border bg-[#fbceb5] rounded-3xl text-xl w-full py-2"
+              className=" bg-mainColor text-white px-8 font-medium text-lg  rounded-full w-full py-2"
               type="submit"
             >
               Sign Up
@@ -131,7 +149,12 @@ const RegisterForm = () => {
           </div>
         </div>
 
-        <div className=" py-3 space-y-3">
+        <div>
+            <p className=" text-white font-semibold pt-2">Already have an account ?<Link className="  text-mainColor " to={'/login'}> Log in now</Link></p>
+
+          </div>
+
+        {/* <div className=" py-3 space-y-3">
           <p className=" text-white text-lg">— Or Continue with With —</p>
           <div className=" flex justify-center">
             <button className="flex items-center gap-2 bg-white dark:bg-gray-900 border border-gray-300 rounded-lg shadow-md px-5 py-3 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ">
@@ -143,7 +166,7 @@ const RegisterForm = () => {
               <span>Continue with Google</span>
             </button>
           </div>
-        </div>
+        </div> */}
       </form>
     </div>
   );

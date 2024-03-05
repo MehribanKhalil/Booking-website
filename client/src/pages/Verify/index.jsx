@@ -33,12 +33,29 @@ const Verify = () => {
 
       <main
         id="verify-page"
-        className="bg-black h-screen text-white  text-center flex justify-center items-center"
+        className=" h-screen text-white  text-center flex justify-center items-center"
       >
-        <div className="flex flex-col gap-4">
+        {/* <div className="flex flex-col gap-4">
           <div className="verify-container text-6xl">Verify</div>
           <button onClick={handleClick}>Go To Home</button>
+        </div> */}
+
+        <div className=" h-[100vh] w-full absolute overflow-hidden ">
+        <img
+          src="https://images.unsplash.com/photo-1547528114-f4daa226e256?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          className="absolute h-full  w-full object-cover top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]"
+        ></img>
+        <div className=" bg-black bg-opacity-60 flex justify-center items-center flex-col gap-12 w-full h-full text-white absolute z-20 top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] ">
+          <p className="font-italic-font  font-semibold  md:text-7xl">
+          Verify
+          </p>
+          <button onClick={handleClick} className=" text-xl">Go To Home</button>
+
+          
         </div>
+        
+      </div>
+
       </main>
     </>
   );

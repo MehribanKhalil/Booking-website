@@ -3,8 +3,25 @@ import SectionTitle from "../../commonComponents/SectionTitle";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import HeroHotelCard from "@/components/commonComponents/HeroHotelCard";
+import { useQuery } from "@tanstack/react-query";
+import { getHotels } from "@/services/HotelsService";
+import Loader from "@/components/commonComponents/Loader";
 
 const HotelsSection = () => {
+  const { isLoading, data, error } = useQuery({
+    queryKey: ["hotels"],
+    queryFn: getHotels,
+  });
+
+  if (isLoading) {
+    return <Loader />;
+  }
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
+
+  console.log(data);
+
   return (
     <section id="tour-events" className=" wrapper section-space mb-10">
       <SectionTitle
@@ -40,25 +57,16 @@ const HotelsSection = () => {
           }}
           className="mySwiper"
         >
-          <SwiperSlide>
-            <HeroHotelCard/>
-          </SwiperSlide>
+         
 
-          <SwiperSlide>
-            <HeroHotelCard/>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <HeroHotelCard/>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <HeroHotelCard/>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <HeroHotelCard/>
-          </SwiperSlide>
+          {data &&
+            data?.map((item) => (
+              <React.Fragment key={item._id}>
+                <SwiperSlide>
+                  <HeroHotelCard {...item} />
+                </SwiperSlide>
+              </React.Fragment>
+            ))}
         </Swiper>
       </div>
     </section>

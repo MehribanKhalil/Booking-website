@@ -4,7 +4,7 @@ import { ExtraServices } from "../../models/hotelsModel/extraServicesModel.js";
 //GET SERVICE
 export const getServices = expressAsyncHandler(async (req, res) => {
   const extraService = await ExtraServices.find({});
-  res.status(200).json({ extraService });
+  res.status(200).json(extraService);
 });
 
 //GET SERVICE BY ID
@@ -14,7 +14,7 @@ export const getServiceById = expressAsyncHandler(async (req, res) => {
   if (!extraService) {
     return res.status(404).json({ message: "Service not found" });
   }
-  res.status(200).json({ extraService });
+  res.status(200).json(extraService);
 });
 
 //CREATE SERVICE

@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import StarRating from "@/components/commonComponents/StartRating";
 import Loader from "@/components/commonComponents/Loader";
 import { useGetHotelDetail } from "@/hooks/UseGetHotels";
+import HotelReviews from "../HotelReviews";
 
 
 const HotelDetailMain = ({className}) => {
@@ -39,13 +40,14 @@ const HotelDetailMain = ({className}) => {
       />
     </div>
 
-      <div className=" py-7 flex gap-5">
+      <div className=" py-7 flex gap-5 flex-wrap">
         <span>{data.size}m<sup>2</sup></span>
-        <span>{data.adultCount} adult</span>
-        <span>{data.childCount} child</span>
+        <span>{data.guests} Guests</span>
+        {/* <span>{data.childCount} child</span> */}
         <span>{data.bedCount} King Beds</span>
         <span>{data.bathroomCount} Bathrooms</span>
         <span>{data.bedroomCount} Bedrooms</span>
+        <span>{data.rooms} Rooms</span>
       </div>
 
       <div className=" space-y-5 pb-6 text-lg text-neutral-600">
@@ -55,7 +57,8 @@ const HotelDetailMain = ({className}) => {
 
       <RoomFacilities />
       <HotelRules />
-      
+      <HotelReviews dataId={data?._id}/>
+
     </section>
   );
 };

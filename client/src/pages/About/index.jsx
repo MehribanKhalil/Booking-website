@@ -44,7 +44,7 @@ const About = () => {
             </div>
 
             <div data-aos-duration="2000">
-              <Button>Find Tours</Button>
+              <Button>Find Hotels</Button>
             </div>
 
            
@@ -54,7 +54,7 @@ const About = () => {
             <img
               src="https://www.radiustheme.com/demo/wordpress/themes/tripfery/wp-content/uploads/2024/01/1-min.webp"
               alt=""
-              className=" w-full lg:max-w-[500px] object-cover"
+              className=" w-full lg:max-w-[800px] object-cover"
             />
           </div>
         </div>

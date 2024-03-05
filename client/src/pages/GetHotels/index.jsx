@@ -31,16 +31,18 @@ const GetHotels = () => {
   }
 
   return (
-    <>
+    <section className="  py-10">
       <Helmet>
         <title>GetHotels</title>
       </Helmet>
 
-      <div className="pt-16 pb-10">
+      {/* <div className="pt-16 pb-10">
         <PageTitle title="Hotels" />
-      </div>
-
-      <div className="flex flex-col   pr-10">
+      </div> */}
+      <button className=" border mx-7 my-3 border-gray-600  rounded-md px-3 py-1 ">
+              New Hotel
+            </button>
+      <div className="flex flex-col ">
         <div className="overflow-x-auto">
           <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
             <div className="overflow-hidden">
@@ -123,7 +125,7 @@ const GetHotels = () => {
           </div>
         </div>
       </div>
-    </>
+    </section>
   );
 };
 

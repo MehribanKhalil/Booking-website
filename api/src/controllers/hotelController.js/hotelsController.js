@@ -5,6 +5,7 @@ import cloudinary from "cloudinary";
 import { HotelFacilities } from "../../models/hotelsModel/hotelFacilitiesModel.js";
 import { HotelCategories } from "../../models/hotelsModel/hotelCategoryModel.js";
 import { ExtraServices } from "../../models/hotelsModel/extraServicesModel.js";
+import { User } from "../../models/userModel/userModel.js";
 
 //GET HOTEL
 export const getHotels = expressAsyncHandler(async (req, res) => {
@@ -62,6 +63,7 @@ export const createHotel = expressAsyncHandler(async (req, res) => {
     galeryImgs: galeryImgs,
     mainImage: mainImage.secure_url,
   });
+  
   const savedHotel = await hotel.save();
   const updatedFacilitiesPromises = foundFacilities.map(async (facility) => {
     facility.hotels.push(savedHotel._id);
@@ -77,97 +79,6 @@ export const createHotel = expressAsyncHandler(async (req, res) => {
   res.status(201).json(savedHotel);
 });
 
-// //UPDATE HOTEL
-// export const updateHotel = expressAsyncHandler(async (req, res) => {
-//   const { id } = req.params;
-//   const { categoryId, facilitiesId, servicesId } = req.body;
-
-//   const mainImage = await cloudinary.uploader.upload(
-//     req.files.mainImage[0].path
-//   );
-
-//   const uploadPromises = req.files.galeryImgs.map(async (file) => {
-//     const result = await cloudinary.uploader.upload(file.path);
-//     return result.secure_url;
-//   });
-
-//   const galeryImgs = await Promise.all(uploadPromises);
-
-//   const existingHotel = Hotels.findByIdAndUpdate(id, {
-//     ...req.body,
-//     mainImage: mainImage.secure_url,
-//     category: categoryId,
-//     facilities: facilitiesId,
-//   });
-
-//   if (!existingHotel) {
-//     return res.status(400).json({ message: "Hotel not found" });
-//   }
-//   res.status(201).json(existingHotel);
-// });
-
-// export const updateHotel = expressAsyncHandler(async (req, res) => {
-//   const { id } = req.params;
-//   const { categoryId, facilitiesId, servicesId } = req.body;
-
-//   let mainImage;
-//   let galeryImgs;
-
-//   if (req.files && req.files.mainImage) {
-//     mainImage = await cloudinary.uploader.upload(req.files.mainImage[0].path);
-//   }
-
-//   if (req.files && req.files.galeryImgs) {
-//     const uploadPromises = req.files.galeryImgs.map(async (file) => {
-//       const result = await cloudinary.uploader.upload(file.path);
-//       return result.secure_url;
-//     });
-//     galeryImgs = await Promise.all(uploadPromises);
-//   }
-
-//   const updateData = {
-//     ...req.body,
-//     category: categoryId,
-//     facilities: facilitiesId,
-//     services: servicesId,
-//   };
-
-//   if (mainImage) {
-//     updateData.mainImage = mainImage.secure_url;
-//   }
-
-//   if (galeryImgs) {
-//     updateData.galeryImgs = galeryImgs;
-//   }
-
-//   const existingHotel = await Hotels.findByIdAndUpdate(id, updateData, {
-//     new: true,
-//   });
-//   // const findCategory = await HotelCategories.findById(categoryId);
-
-//   // if (!findCategory) {
-//   //   return res.status(400).json({ message: "Category not found" });
-//   // }
-
-//   await HotelCategories.findOneAndUpdate({
-//     hotels: existingHotel._id
-//   })
-
-//   // if (existingHotel.category.toString() !== categoryId.toString()) {
-//   //   const previousCategory = await HotelCategories.findById(existingHotel.category);
-//   //   previousCategory.hotels.pull(existingHotel._id);
-//   //   await previousCategory.save();
-
-//   //   findCategory.hotels.push(existingHotel._id);
-//   //   await findCategory.save();
-//   // }
-
-//   if (!existingHotel) {
-//     return res.status(400).json({ message: "Hotel not found" });
-//   }
-//   await findCategory.save();
-//   res.status(201).json(existingHotel);
-// });
 
 export const updateHotel = expressAsyncHandler(async (req, res) => {
   const { id } = req.params;

@@ -20,21 +20,21 @@ const HotelGallery = () => {
           <img
             src={galeryImgs[0]}
             alt=""
-            className="h-[535px] cursor-pointer hotel-img1 w-full lg:max-w-[500px] object-cover"
+            className=" h-[400px] lg:h-[535px] min-w-[400px] cursor-pointer hotel-img1 w-full lg:max-w-[500px] object-cover"
           />
 
          <div className=" flex flex-col  gap-7">
          <img
             src={galeryImgs[1]}
             alt=""
-            className="h-[250px] cursor-pointer hotel-img2 w-full lg:max-w-[500px] object-cover"
+            className=" h-[400px] lg:h-[250px]  min-w-[300px] cursor-pointer hotel-img2 w-[950px] lg:max-w-[500px] object-cover"
 
           />
 
           <img
             src={galeryImgs[2]}
             alt=""
-            className="h-[250px] hotel-img3 w-full lg:max-w-[500px] object-cover cursor-pointer"
+            className=" h-[400px] lg:h-[250px] min-w-[300px] hotel-img3 w-full object-cover cursor-pointer"
 
           />
          </div>
@@ -42,7 +42,7 @@ const HotelGallery = () => {
           <img
             src={galeryImgs[3]}
             alt=""
-            className="h-[535px] hotel-img4 w-full lg:max-w-[500px] object-cover cursor-pointer"
+            className=" h-[400px] lg:h-[535px] min-w-[400px] hotel-img4 w-full object-cover cursor-pointer"
 
           />
       </div>

@@ -12,8 +12,9 @@ const Contact = () => {
         <title>Contact</title>
       </Helmet>
       <div id="Contact page" className="">
-        <div className="min-h-[95vh] flex flex-col  lg:flex-row gap-16 items-center">
-          <div className="h-full flex py-10 px-1 justify-center items-center bg-[url('https://cozystay.loftocean.com/island-resort/wp-content/uploads/sites/3/2023/05/christian-lambert-vmIWr0NnpCQ-unsplash.jpg')] bg-cover bg-center w-full ">
+        <div className="min-h-[110vh] flex flex-col  lg:flex-row gap-16 items-center ">
+     
+          <div className="h-full flex py-10 px-1 justify-center items-center bg-cover bg-center w-full ">
             <ContactForm />
           </div>
           <div className=" w-full ">

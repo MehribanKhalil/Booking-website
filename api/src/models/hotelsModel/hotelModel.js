@@ -16,7 +16,7 @@ const hotelSchema = new Schema(
     bedCount: { type: Number },
     bathroomCount: { type: Number },
     size: { type: Number },
-    starRating: { type: Number, min: 1, max: 5 },
+    starRating: { type: Number },
     mainImage: { type: String },
     galeryImgs: [{ type: String }],
     email: { type: String },
@@ -48,13 +48,14 @@ const hotelSchema = new Schema(
           type: mongoose.Types.ObjectId,
           ref: "User",
         },
-        name: { type: String },
+        likes: [{ type: Schema.Types.ObjectId, ref: "User" }],
         rating: { type: Number },
-        comment: { type: String },
+        review: { type: String },
+        createdAt: { type: Date, default: Date.now },
+        updatedAt: { type: Date, default: Date.now },
       },
     ],
   },
-
   {
     timestamps: true,
   }

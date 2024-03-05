@@ -1,7 +1,6 @@
 import express from "express";
 import multer from 'multer'
-import { createHotel, deleteHotel, getAvailableHotels, getHotelByCategory, getHotels, getHotelsById, updateHotel } from "../controllers/hotelController.js/hotelsController.js";
-import { createLocation, getLocation } from "../controllers/hotelController.js/hotelsLocationController.js";
+import {  createHotel, deleteHotel, getAvailableHotels, getHotelByCategory, getHotels, getHotelsById, updateHotel } from "../controllers/hotelController.js/hotelsController.js";
 import { createFacility, deleteFacility, getFacility, getFacilityById, updateFacility } from "../controllers/hotelController.js/hotelFacilitiesController.js";
 import { protect } from "../middleware/authMiddleware.js";
 import { upload } from "../middleware/multerMiddleware.js";

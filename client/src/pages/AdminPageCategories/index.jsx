@@ -21,6 +21,7 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
+  DialogClose
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -56,17 +57,17 @@ const AdminPageCategories = () => {
   const onCreateSubmit = async (data) => {
     const formData = new FormData();
     formData.append("categoryName", data.categoryName);
-    formData.append("categoryImage", data.categoryImage); // Assuming data.categoryImage is the File object
-
+    formData.append("categoryImage", data.categoryImage);
     createCategory(formData);
     console.log(data);
+
   };
   const onUpdateSubmit = async (data) => {
     const formData = new FormData();
     formData.append("categoryName", data.categoryName);
     formData.append("categoryImage", data.categoryImage);
     updateCategory(formData);
-    console.log(data);
+    // console.log(data);
   };
 
   const handleClick = (id) => {
@@ -82,19 +83,19 @@ const AdminPageCategories = () => {
   }
 
   return (
-    <>
+    <section className=' py-10'>
       <Helmet>
         <title>Admin Page Categories</title>
       </Helmet>
 
-      <div className="pt-16 px-10 pb-10">
+      {/* <div className="pt-16 px-10 flex justify-center">
         <PageTitle title="Categories" />
-      </div>
+      </div> */}
 
       <div className="add-new-category px-8 pb-5 cursor-pointer">
         <Dialog>
           <DialogTrigger asChild>
-            <span className=" border  border-gray-600  rounded-md px-3 py-1 ">
+            <span className=" border  border-mainColor  rounded-md px-3 py-1 ">
               New Category
             </span>
           </DialogTrigger>
@@ -148,13 +149,20 @@ const AdminPageCategories = () => {
                     />
                   </div>
                 </div>
-                <DialogFooter>
+                <DialogFooter className='flex gap-1'>
+                    
                   <button
-                    className=" border border-gray-500 px-3 py-1 rounded-md"
+                    className=" border border-mainColor px-3 py-1 rounded-md"
                     type="submit"
                   >
                     Save changes
                   </button>
+
+                  <DialogClose asChild>
+                <button  className="border border-mainColor px-3 py-1 rounded-md">
+                  Close
+                </button>
+              </DialogClose>
                 </DialogFooter>
               </form>
             </div>
@@ -181,7 +189,7 @@ const AdminPageCategories = () => {
                     </th>
                   </tr>
                 </thead>
-                {data.map((category) => (
+                {data?.map((category) => (
                   <tbody key={category._id}>
                     <tr className="border-b dark:border-neutral-500">
                       <td className="whitespace-nowrap px-1 py-4 font-medium">
@@ -302,7 +310,7 @@ const AdminPageCategories = () => {
       </div>
 
       {/* <CategoryUpdateModal /> */}
-    </>
+    </section>
   );
 };
 

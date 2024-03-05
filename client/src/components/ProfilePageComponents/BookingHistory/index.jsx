@@ -1,8 +1,18 @@
+import Loader from "@/components/commonComponents/Loader";
+import { useGetMe } from "@/hooks/UserHooks";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const BookingHistory = ({className}) => {
+const BookingHistory = ({ className }) => {
+  const { data, isLoading, error } = useGetMe();
+  if (isLoading) {
+    return <Loader />;
+  }
+  const nav = useNavigate();
   return (
-    <div className={`booking-history border border-gray-100 rounded-lg p-5 ${className}`}>
+    <div
+      className={`booking-history border border-gray-100 rounded-lg p-5 ${className}`}
+    >
       <div className=" space-y-1 pb-4 text-gray-500">
         <h5 className=" text-mainColor  text-2xl font-medium ">My Bookings</h5>
         <p>Here you can manage your order</p>
@@ -13,36 +23,61 @@ const BookingHistory = ({className}) => {
           <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
             <div className="overflow-hidden">
               <table className="min-w-full  text-center">
-                <thead className="border-b  bg-[#384cffbd] font-medium text-white dark:border-neutral-500 dark:bg-neutral-900">
+                <thead className="border-b  bg-mainColor font-medium text-white dark:border-neutral-500 dark:bg-neutral-900">
                   <tr>
                     <th scope="col" className=" px-6 py-4">
-                      Order ID
+                      Hotel Name
                     </th>
                     <th scope="col" className=" px-6 py-4">
-                      Date
+                      Booking Date
                     </th>
                     <th scope="col" className=" px-6 py-4">
-                        Booking type
+                      Check-In
                     </th>
                     <th scope="col" className=" px-6 py-4">
-                    Booking amount
+                      Check-Out
+                    </th>
+                    <th scope="col" className=" px-6 py-4">
+                      Total Cost
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="border-b dark:border-neutral-500">
-                    <td className="whitespace-nowrap  px-6 py-4 font-medium">1</td>
-                    <td className="whitespace-nowrap  px-6 py-4">Mark</td>
-                    <td className="whitespace-nowrap  px-6 py-4">Otto</td>
-                    <td className="whitespace-nowrap  px-6 py-4">@mdo</td>
-                  </tr>
-                  <tr className="border-b dark:border-neutral-500">
-                    <td className="whitespace-nowrap  px-6 py-4 font-medium">2</td>
-                    <td className="whitespace-nowrap  px-6 py-4 ">Jacob</td>
-                    <td className="whitespace-nowrap  px-6 py-4">Thornton</td>
-                    <td className="whitespace-nowrap  px-6 py-4">@fat</td>
-                  </tr>
-                 
+                  {data?.bookings.length === 0 ? (
+                    <p className=" py-4 text-lg font-medium">
+                      No bookings yet .{" "}
+                      <span
+                        className=" italic border-b border-mainColor cursor-pointer"
+                        onClick={() => nav("/hotels")}
+                      >
+                        {" "}
+                        Discover our hotels
+                      </span>
+                    </p>
+                  ) : (
+                    data?.bookings.map((booking) => (
+                      <tr
+                        className="border-b dark:border-neutral-500 font-medium"
+                        key={booking._id}
+                      >
+                        <td className="whitespace-nowrap  px-6 py-4">
+                          {booking?.hotelId.title}
+                        </td>
+                        <td className="whitespace-nowrap  px-6 py-4">
+                          {booking?.createdAt.toString().split("T")[0]}
+                        </td>
+                        <td className="whitespace-nowrap  px-6 py-4">
+                          {booking?.checkInDate.toString().split("T")[0]}
+                        </td>
+                        <td className="whitespace-nowrap  px-6 py-4">
+                          {booking?.checkOutDate.toString().split("T")[0]}
+                        </td>
+                        <td className="whitespace-nowrap  px-6 py-4">
+                          ${booking?.amountPaid}
+                        </td>
+                      </tr>
+                    ))
+                  )}
                 </tbody>
               </table>
             </div>

@@ -6,12 +6,12 @@ import Logo from "@/components/NavbarComponents/Logo";
 import Account from "@/components/NavbarComponents/Account";
 import Search from "@/components/NavbarComponents/Search";
 import NavLinks from "@/components/NavbarComponents/NavLinks";
-import Hamburger from 'hamburger-react'
-
+import Hamburger from "hamburger-react";
+import MobileNav from "@/components/NavbarComponents/MobileNav";
 
 const Navbar = () => {
   const [isScroll, setisScroll] = useState(false);
-  const [isOpen, setOpen] = useState(false)
+  const [isOpen, setOpen] = useState(false);
 
   const nav = () => {
     const scroll = window.scrollY;
@@ -25,16 +25,16 @@ const Navbar = () => {
     };
   }, []);
 
-  const {pathname}=useLocation()
+  const { pathname } = useLocation();
 
   return (
     <nav id="navbar">
       <div
         className={` ${
-          isScroll
-            ? " bg-mainColor  bg-opacity-80    py-3  z-40  translate-y-0"
+          isScroll || pathname === "/profile"
+            ? "shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]  bg-mainColor  bg-opacity-80    py-3  z-40  translate-y-0"
             : "py-4   "
-        } duration-500 flex text-white  justify-between items-center fixed z-50 top-0 left-0 w-full  wrapper ${pathname==='profil' ? ' bg-mainColor text-white' : ''} `}
+        } duration-500 flex text-white  justify-between items-center fixed z-50 top-0 left-0 w-full  wrapper $ `}
       >
         <NavLink to={"/"}>
           <Logo isScroll={isScroll} />
@@ -46,10 +46,12 @@ const Navbar = () => {
           {/* <Search /> */}
           <Account />
           <div className=" md:hidden">
-        <Hamburger size={23} />
-        </div>
-        </div>
+            <Hamburger toggled={isOpen} toggle={setOpen} size={23} />
+          </div>
         
+        </div>
+
+        <MobileNav setOpen={setOpen} isOpen={isOpen} />
       </div>
     </nav>
   );

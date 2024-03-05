@@ -9,7 +9,7 @@
 
 /* width */
 ::-webkit-scrollbar {
-  width: 11px;
+  width: 8px;
 }
 
 /* Track */
@@ -105,10 +105,9 @@
     font-family: "Arial", serif;
   }
 
-  h2,h3,h4,h5,h6{
-    font-family: "Marcellus", serif;
-
-  }
+  // h2,h3,h4,h5,h6{
+    // font-family: "Marcellus", serif;
+  // }
 
   
   .wrapper{
@@ -123,7 +122,7 @@
     @apply  border  outline-none border-mainColor px-6 py-3 placeholder:text-[16px]
   }
 
-  .input-transparent{
+  .input-transparent {
     @apply  border   bg-white bg-opacity-25 hover:bg-transparent duration-300    border-transparent hover:border hover:border-white   text-white  placeholder:text-white
   }
 

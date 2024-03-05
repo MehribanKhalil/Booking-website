@@ -27,11 +27,21 @@ export const getHotelDetail = async (id) => {
 //DELETE HOTEL
 export const deleteHotel = async (id) => {
   try {
-    console.log(id);
     const response = await api.delete(`/hotels/${id}`);
     return response.data;
   } catch (error) {
     // console.error("Error fetching hotel:", error); 
     throw new Error("Failed to delete hotel. Please try again later."); 
+  }
+};
+
+
+//GET SIMILAR HOTELS
+export const getSimilarHotels = async (id) => {
+  try {
+    const response = await api.get(`/getSimilar/${id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to geting similar hotel. Please try again later."); 
   }
 };

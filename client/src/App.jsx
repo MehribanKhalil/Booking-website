@@ -24,6 +24,8 @@ import AdminPageCategories from "./pages/AdminPageCategories";
 import NotFound from "./pages/NotFound";
 import News from "./pages/News";
 import AdminFacilities from "./pages/AdminFacilities";
+import AdminPageFaq from "./pages/AdminPageFaq";
+import PrivateRoute from "./router/PrivateRoute";
 
 function App() {
   useEffect(() => {
@@ -51,12 +53,18 @@ function App() {
             <Route path="/hotels" element={<Hotels />} />
             <Route path="/detail/:id" element={<HotelsDetail />} />
           </Route>
-          <Route element={<AdminLayout />}>
-            <Route path="/admin/gethotels" element={<GetHotels />} />
-            <Route path="/admin/createhotels" element={<CreateHotels />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/admin/categories" element={<AdminPageCategories />} />
-            <Route path="/admin/facilities" element={<AdminFacilities />} />
+          <Route element={<PrivateRoute />}>
+             <Route path="/admin" element={<AdminLayout />}>
+              <Route path="/admin/gethotels" element={<GetHotels />} />
+              <Route path="/admin/createhotels" element={<CreateHotels />} />
+              <Route index element={<Admin />} />
+              <Route
+                path="/admin/categories"
+                element={<AdminPageCategories />}
+              />
+              <Route path="/admin/facilities" element={<AdminFacilities />} />
+              <Route path="/admin/faqs" element={<AdminPageFaq />} />
+            </Route>
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

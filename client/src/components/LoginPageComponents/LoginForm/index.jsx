@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Checkbox } from "@/components/ui/checkbox";
 import { loginValidationSchema } from "@/utils/validationSchema";
 import { userLogin } from "@/hooks/UseAuth";
+import { Link } from "react-router-dom";
+import { FaRegEye } from "react-icons/fa";
+import { FaRegEyeSlash } from "react-icons/fa";
+import { toast } from "sonner";
 
 const LoginForm = () => {
-  const { mutate } = userLogin(); 
+  const [passwordSeen, setPasswordSeen] = useState(false);
+
+  const { mutate, isError, error } = userLogin();
+
 
   const {
     register,
@@ -23,10 +30,14 @@ const LoginForm = () => {
     },
   });
 
-  const onSubmit = (data) =>{
+  const handlePasswordSeen = () => {
+    setPasswordSeen(!passwordSeen);
+  };
+
+  const onSubmit = (data) => {
     console.log(data);
     mutate(data);
-  }
+  };
 
   return (
     <div className=" login-form text-center">
@@ -40,31 +51,56 @@ const LoginForm = () => {
         <div className=" space-y-5">
           <div className=" flex flex-col gap-1">
             <Input
-              className="input-transparent placeholder:text-white rounded-3xl"
+              className="bg-white bg-opacity-25 hover:bg-transparent duration-300    border-transparent hover:border hover:border-white   text-white  placeholder:text-white rounded-full"
               placeholder="Email"
               {...register("email")}
             />
-            {errors.email && <p className="error-message font-medium" >{errors.email.message}</p>}
-
-           
+            {errors.email && (
+              <p className="error-message font-medium">
+                {errors.email.message}
+              </p>
+            )}
           </div>
 
           <div className="flex flex-col gap-1">
-          <Input
-              className="input-transparent placeholder:text-white rounded-3xl"
-              placeholder="Password"
-              {...register("password")}
-            />
-            {errors.password && <p className="error-message font-medium">{errors.password.message}</p>}
+            <div className="bg-white bg-opacity-25 hover:bg-transparent  duration-300 rounded-full   border-transparent hover:border hover:border-white  text-white   flex pr-3">
+              <Input
+                className=" border-none outline-none bg-transparent placeholder:text-white"
+                placeholder="Password"
+                type={passwordSeen ? "text" : "password"}
+                {...register("password")}
+              />
+              <button type="button" onClick={handlePasswordSeen}>
+                {passwordSeen ? (
+                  <FaRegEye size={20} />
+                ) : (
+                  <FaRegEyeSlash size={20} />
+                )}
+              </button>
+            </div>
+            {errors.password && (
+              <p className="error-message font-medium">
+                {errors.password.message}
+              </p>
+            )}
           </div>
 
           <div>
             <button
-              className=" border bg-[#fbceb5] rounded-3xl text-xl w-full py-2"
+              className=" bg-mainColor text-white px-8 font-medium text-lg  rounded-full w-full py-2"
               type="submit"
             >
               Sign In
             </button>
+          </div>
+
+          <div>
+            <p className=" text-white font-semibold">
+              Dont have an account ?{" "}
+              <Link className="  text-mainColor " to={"/register"}>
+                Register now
+              </Link>
+            </p>
           </div>
 
           {/* <div className=" pt-2 flex items-center justify-between text-[#fbceb5]">

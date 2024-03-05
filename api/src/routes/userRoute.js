@@ -1,11 +1,29 @@
 import express from "express";
-import { deleteUser, getUser, getUserById, updateUser } from "../controllers/userController.js";
+import { upload } from "../middleware/multerMiddleware.js";
 
-const myUsers=express.Router()
+import {
+  changeAvatar,
+  deleteUser,
+  getCurrentUser,
+  getUser,
+  getUserById,
+  updateProfile,
+  updateUser,
+} from "../controllers/userController.js";
+import { protect } from "../middleware/authMiddleware.js";
+import { changePassword } from "../controllers/authController.js";
 
-myUsers.get('/user',getUser)
-myUsers.get('/user/:id',getUserById)
-myUsers.put('/user/:id',updateUser)
-myUsers.delete('/user/:id',deleteUser)
+const myUsers = express.Router();
 
-export default myUsers
+myUsers.get("/user", getUser);
+myUsers.get("/me", protect, getCurrentUser);
+myUsers.put("/changeAvatar", protect, upload.single("avatar"), changeAvatar);
+myUsers.get("/user/:id", getUserById);
+myUsers.put("/user/:id", updateUser);
+myUsers.delete("/user/:id", deleteUser);
+myUsers.put('/change-password',protect, changePassword)
+myUsers.put('/update-profile', updateProfile)
+
+
+
+export default myUsers;

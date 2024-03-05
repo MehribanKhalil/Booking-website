@@ -31,10 +31,12 @@ const userSchema = new Schema(
     //   type: Number,
     //   required: [true, "Please provide a mobile number!"],
     // },
-    // image: { type: String },
+    avatar: {
+      type: String,
+      default:'https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg'},
     emailVerificationToken: { type: String },
     emailVerificationExpires: { type: Date },
-    verified: { type: Boolean},
+    verified: { type: Boolean, default: false },
     password: {
       type: String,
       required: [true, "Please provide a password!"],
@@ -61,7 +63,7 @@ const schema = Joi.object({
   firstName: Joi.string().min(3).max(30).trim(),
   lastName: Joi.string().min(3).max(30).trim(),
   // mobileNumber: Joi.number(),
-  // image: Joi.string().trim(),
+  avatar: Joi.string().trim(),
   password: Joi.string().trim(),
   userName: Joi.string().trim(),
   role: Joi.string().trim(),
@@ -100,7 +102,7 @@ userSchema.methods.matchedPassword = async function (enteredPassword) {
 
 userSchema.methods.emailVerification = function () {
   this.emailVerificationToken = crypto.randomBytes(20).toString("hex");
-  this.emailVerificationExpires = Date.now() + 3600000; //Expires in an hour
+  this.emailVerificationExpires = Date.now() + 3600000;
 };
 
 export const User = mongoose.model("User", userSchema);

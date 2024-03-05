@@ -7,12 +7,16 @@ import {v2 as cloudinary} from "cloudinary";
 import { notFound, errorHandler } from './src/middleware/errorHandling.js';
 
 
-
 //ROUTES
 import authRouter from "./src/routes/authRoute.js";
 import userRouter from "./src/routes/userRoute.js";
 import myHotels from "./src/routes/hotelsRoute.js";
 import bookingRoutes from "./src/routes/bookingRoute.js";
+import faqs from "./src/routes/faqsRoute.js";
+import reviews from "./src/routes/reviewsRouter.js";
+import testimonials from "./src/routes/testimonialsRouter.js";
+import blogs from "./src/routes/blogRouter.js";
+import tags from "./src/routes/tagRouter.js";
 
 const app = express();
 
@@ -38,6 +42,11 @@ app.use("/api/auth", authRouter);
 app.use("/api", userRouter);
 app.use("/api", myHotels);
 app.use("/api", bookingRoutes);
+app.use("/api", faqs);
+app.use("/api", reviews);
+app.use("/api", testimonials);
+app.use("/api", blogs);
+app.use("/api", tags);
 
 
 const port = process.env.PORT || 5000;

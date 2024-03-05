@@ -10,7 +10,7 @@ import { TiSocialLinkedin } from "react-icons/ti";
 const NewsConnection = () => {
   return (
     <div className="follow-us pt-5 pb-3">
-      <h2 className="class-h2 blog-about__h2  border-b-2 border-mainColor font-semibold m-0 pt-5 mb-5 ">FOLLOW US</h2>
+      <h2 className="class-h2 blog-about__h2  border-b-2 border-gray-400 font-semibold m-0 pt-5 mb-5 ">FOLLOW US</h2>
       <div className="follow-us__social flex gap-3 text-2xl">
         <Link >
           <span>

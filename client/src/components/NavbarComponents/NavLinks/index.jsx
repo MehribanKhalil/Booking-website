@@ -4,7 +4,7 @@ import Logo from '../Logo'
 
 const NavLinks = ({isScroll}) => {
   return (
-    <ul className=" hidden lg:flex items-center gap-8 xl:gap-12">
+    <ul className=" hidden md:flex items-center gap-8 xl:gap-12">
     
     <li
       className='after:bg-white nav-item'
@@ -13,13 +13,7 @@ const NavLinks = ({isScroll}) => {
         Home
       </NavLink>
     </li>
-    <li
-      className='after:bg-white nav-item'
-    >
-      <NavLink className="nav-link" to={"/categories"}>
-        Categories
-      </NavLink>
-    </li>
+  
     <li className='after:bg-white nav-item'>
     <NavLink className="nav-link" to={"/about"}>
         About

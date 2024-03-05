@@ -25,17 +25,22 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useForm, Controller } from "react-hook-form";
+import {
+  useCreateFacility,
+  useDeleteFacility,
+  useGetFacilities,
+  useUpdateFacility,
+} from "@/hooks/UseFacilities";
 
 const AdminFacilities = () => {
-
-const { isLoading, data, error } = useGetCategories();
+  const { isLoading, data, error } = useGetFacilities();
   const [image, setImage] = useState(null);
-  const [categoryId, setCategoryId] = useState(null);
-  const { mutate: deleteCategory } = useDeleteCategory();
-  const { mutate: updateCategory } = useUpdateCategory(categoryId);
-  const { mutate: createCategory } = useCreateCategory();
-  const handleDelete = (categoryId) => {
-    deleteCategory(categoryId);
+  const [facilityId, setFacilityId] = useState(null);
+  const { mutate: deleteFacility } = useDeleteFacility();
+  const { mutate: updateFacility } = useUpdateFacility(facilityId);
+  const { mutate: createFacility } = useCreateFacility();
+  const handleDelete = (facilityId) => {
+    deleteFacility(facilityId);
   };
 
   const {
@@ -45,30 +50,28 @@ const { isLoading, data, error } = useGetCategories();
     formState: { errors },
   } = useForm({
     defaultValues: {
-        facilityTitle: "",
+      facilityTitle: "",
       facilityImage: null,
     },
   });
 
-
-
   const onCreateSubmit = async (data) => {
     const formData = new FormData();
     formData.append("facilityTitle", data.facilityTitle);
-    formData.append("facilityImage", data.facilityImage); 
-    createCategory(formData);
+    formData.append("facilityImage", data.facilityImage);
+    createFacility(formData);
     console.log(data);
   };
   const onUpdateSubmit = async (data) => {
     const formData = new FormData();
     formData.append("facilityTitle", data.facilityTitle);
     formData.append("facilityImage", data.facilityImage);
-    updateCategory(formData);
+    updateFacility(formData);
     console.log(data);
   };
 
   const handleClick = (id) => {
-    setCategoryId(id);
+    setFacilityId(id);
   };
 
   if (isLoading) {
@@ -80,14 +83,14 @@ const { isLoading, data, error } = useGetCategories();
   }
 
   return (
-    <>
+    <section className=" py-10">
       <Helmet>
         <title>Admin Facilities</title>
       </Helmet>
 
-      <div className="pt-16 px-10 pb-10">
+      {/* <div className="pt-16 px-10 flex justify-center">
         <PageTitle title="Facilities" />
-      </div>
+      </div> */}
 
       <div className="add-new-facility px-8 pb-5 cursor-pointer">
         <Dialog>
@@ -179,18 +182,18 @@ const { isLoading, data, error } = useGetCategories();
                     </th>
                   </tr>
                 </thead>
-                {data.map((category) => (
-                  <tbody key={category._id}>
+                {data?.map((facility) => (
+                  <tbody key={facility._id}>
                     <tr className="border-b dark:border-neutral-500">
-                      <td className="whitespace-nowrap px-1 py-4 font-medium">
+                      <td className="whitespace-nowrap px-4 py-4 font-medium">
                         <img
-                          src={category.facilityImage}
-                          className=" w-[120px] h-[120px] object-cover"
+                          src={facility.facilityImage}
+                          className=" w-[60px] h-[60px] object-cover"
                           alt=""
                         />
                       </td>
                       <td className="whitespace-nowrap px-6 py-4 font-medium">
-                        <NavLink>{category.facilityTitle}</NavLink>
+                        <NavLink>{facility.facilityTitle}</NavLink>
                       </td>
 
                       <td className="whitespace-nowrap px-6 py-4">
@@ -198,16 +201,16 @@ const { isLoading, data, error } = useGetCategories();
                           <button className=" p-2">
                             <Dialog>
                               <DialogTrigger
-                                onClick={() => handleClick(category?._id)}
+                                onClick={() => handleClick(facility?._id)}
                                 asChild
                               >
                                 <FaPen className="cursor-pointer" size={15} />
                               </DialogTrigger>
                               <DialogContent className="sm:max-w-[425px]">
                                 <DialogHeader>
-                                  <DialogTitle>Edit category</DialogTitle>
+                                  <DialogTitle>Edit facility</DialogTitle>
                                   <DialogDescription>
-                                    Make changes to your category here. Click
+                                    Make changes to your facility here. Click
                                     save when you're done.
                                   </DialogDescription>
                                 </DialogHeader>
@@ -284,7 +287,7 @@ const { isLoading, data, error } = useGetCategories();
                           </button>
                           <button
                             className="p-2"
-                            onClick={() => handleDelete(category._id)}
+                            onClick={() => handleDelete(facility._id)}
                           >
                             <IoMdTrash size={20} />
                           </button>
@@ -298,11 +301,8 @@ const { isLoading, data, error } = useGetCategories();
           </div>
         </div>
       </div>
-  
-      
-    </>
+    </section>
   );
 };
 
 export default AdminFacilities;
-

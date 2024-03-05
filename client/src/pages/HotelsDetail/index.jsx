@@ -11,16 +11,15 @@ const HotelsDetail = () => {
     <>
       <Helmet>
         <title>HotelsDetail</title>
-      </Helmet>
-
+      </Helmet> 
       <section id="hotels-detail" className=" wrapper section-space">
         <HotelGallery  />
-        <div className="flex gap-9 items-start">
-          <HotelDetailMain className=" w-2/3"  />
-          <HotelSideBar className=" w-1/3" />
+        <div className="flex flex-col lg:flex-row gap-9 items-start">
+          <HotelDetailMain className=" w-full  lg:w-2/3"  />
+          <HotelSideBar className="  w-full  lg:w-1/3" />
           
         </div>
-        <HotelAvailability/>
+        {/* <HotelAvailability/> */}
         <SimilarRoomsSection />
       </section>
     </>

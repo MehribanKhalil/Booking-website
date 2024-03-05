@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import { User } from "../models/userModel/userModel.js";
 import sendMail from "../utils/sendEmail.js";
+import bcrypt from 'bcrypt'
 
 export const authWithGoogle = async (req, res) => {
   try {
@@ -13,7 +14,6 @@ export const authWithGoogle = async (req, res) => {
       personFields: "emailAddresses,names,photos",
     });
 
-    console.log("MEEEEEEEEEEEEEEEEEE", me);
 
     let user = await User.findOne({
       email: me.data.emailAddresses[0].value,
@@ -67,7 +67,6 @@ export const userRegister = async (req, res) => {
     //   return res.status(400).json(error.details[0].message);
     // }
 
-    console.log(req.body);
 
     const user = await User.findOne({
       email,
@@ -104,6 +103,13 @@ export const userRegister = async (req, res) => {
 export const userLogin = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email: email });
+  if (!user) { 
+    return res.status(400).json({ message: "Invalid email or password" });
+  }
+  if (!user.verified) {
+    return res.status(403).json({ error: 'Email not verified' })
+  }
+
 
   if (user && (await user.matchedPassword(password))) {
     generateToken(res, user);
@@ -169,3 +175,33 @@ export const updateUserProfile = asyncHandler(async (req, res) => {
   }
   res.status(200).json({ updateUser });
 });
+
+
+//Change password
+export const changePassword = async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body
+    const { _id } = req.user
+
+    const findCurrentUser = await User.findById(_id)
+
+    const isValidPassword = await findCurrentUser.matchedPassword(currentPassword)
+
+    if (!isValidPassword) return res.status(400).json({ message: 'Password is not valid' })
+
+    const hashPassword = await bcrypt.hash(newPassword, 10)
+    const findUser = await User.findByIdAndUpdate(
+      findCurrentUser._id,
+      {
+        password: hashPassword
+      },
+      { new: true }
+    )
+    if (!findUser) return res.status(404).json({ message: 'User not found' })
+
+    await findUser.save()
+    res.status(200).json({ message: 'Password changed successfully' })
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}

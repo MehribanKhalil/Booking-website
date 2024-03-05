@@ -4,10 +4,11 @@ import { Outlet, useLocation, useParams } from "react-router-dom";
 import Footer from "../Footer";
 import BreadCrumbs from "@/components/commonComponents/BreadCrumbs";
 import { Toaster } from "@/components/ui/sonner";
+import { useGetHotelDetail } from "@/hooks/UseGetHotels";
 
 const shouldShowBreadcrumbs = (currentPath) => {
   const { id } = useParams();
-  const excludedPaths = ["/", "/profile", "/login", "/register",`/detail/${id}`];
+  const excludedPaths = ["/", "/profile", "/login", "/register"];
   // `/detail/${id}`
   return !excludedPaths.includes(currentPath);
 };

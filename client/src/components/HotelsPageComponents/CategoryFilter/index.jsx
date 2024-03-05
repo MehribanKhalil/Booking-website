@@ -1,10 +1,12 @@
 import Loader from "@/components/commonComponents/Loader";
 import { useGetCategories } from "@/hooks/UseCategories";
+import useHotel from "@/hooks/user-hotel";
 import React, { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 
 const CategoryFilter = () => {
   const [isOpen, setIsOpen] = useState(true);
+  const { selectedCategories, toggleCategory } = useHotel()
 
   const toggleContent = () => {
     setIsOpen(!isOpen);
@@ -19,7 +21,7 @@ const CategoryFilter = () => {
   }
 
   return (
-    <div className="category-filter  border border-mainColor  rounded-lg">
+    <div className="category-filter  border border-gray-200  rounded-lg">
       <div
         className="filter-title cursor-pointer"
         onClick={() => toggleContent()}
@@ -41,19 +43,20 @@ const CategoryFilter = () => {
         }`}
       >
         <div className=" space-y-2 text-lg px-10 py-7">
-          {data.map((category) => (
-            <div class="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem]">
+        {data.map(category => (
+            <div class='mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem]'>
               <input
-                class="filter-input"
-                type="checkbox"
-                value=""
-                id="checkboxDefault"
+                class='filter-input'
+                type='checkbox'
+                value=''
+                id={category.categoryName}
+                checked={selectedCategories.includes(category.categoryName)}
+                onChange={() => toggleCategory(category.categoryName)}
               />
               <label
-                class="inline-block pl-[0.15rem] hover:cursor-pointer text-gray-600"
-                for="checkboxDefault"
-              >
-                <h6 className="">{category.categoryName}</h6>
+                class='inline-block pl-[0.15rem] hover:cursor-pointer text-gray-600'
+                for={category.categoryName}>
+                <h6 className=''>{category.categoryName}</h6>
               </label>
             </div>
           ))}

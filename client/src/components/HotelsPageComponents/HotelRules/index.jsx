@@ -20,10 +20,9 @@ const HotelRules = () => {
             <ul className='px-4 space-y-2 text-lg text-neutral-800 cursor-pointer'>
               {
                 data.rules.map((rule,i)=>(
-                  <li className='list-disc' key={i}>
+                  <li className='list-disc   text-mainColor' key={i}>
                     <p>{rule}</p>
                   </li>
-
                 ))
               }
             </ul>

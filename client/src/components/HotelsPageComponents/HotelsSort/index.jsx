@@ -9,7 +9,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { IoIosArrowDown } from "react-icons/io";
 
-const HotelsSort = () => {
+const HotelsSort = ({ handleSort }) => {
+  const handleSortOption = (option) => {
+    handleSort(option);
+  };
+
   return (
     <div className="hotels-sort ">
       <DropdownMenu>
@@ -17,12 +21,15 @@ const HotelsSort = () => {
             <button className=" flex gap-1 items-center  text-mainColor border border-mainColor  px-2 py-1 rounded-full ">Sort <IoIosArrowDown /></button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuItem>A to Z</DropdownMenuItem>
-          <DropdownMenuItem>Z to A</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => handleSortOption("A to Z")}>A to Z</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => handleSortOption("Z to A")}>Z to A</DropdownMenuItem>
           <DropdownMenuSeparator  className='bg-lightBlue mx-2' />
 
-          <DropdownMenuItem>Low to High</DropdownMenuItem>
-          <DropdownMenuItem>High to Low</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => handleSortOption("Low to High")}>Low to High</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => handleSortOption("High to Low")}>High to Low</DropdownMenuItem>
+          {/* <DropdownMenuSeparator  className='bg-lightBlue mx-2' /> */}
+          <DropdownMenuItem onClick={() => handleSortOption("Default")}>Default</DropdownMenuItem>
+
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

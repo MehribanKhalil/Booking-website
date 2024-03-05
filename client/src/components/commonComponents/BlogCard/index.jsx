@@ -9,7 +9,7 @@ const BlogCard = ({ image, title, date, authorName, info }) => {
           <img
             src={image}
             alt="blog-img"
-            className=" shadow-[0_8px_30px_rgb(0,0,0,0.12)] w-full group-hover:scale-110 overflow-hidden duration-500 object-cover"
+            className=" shadow-[0_8px_30px_rgb(0,0,0,0.12)] w-full group-hover:scale-110 overflow-hidden duration-500 object-cover  h-[300px]"
           />
         </Link>
       </div>

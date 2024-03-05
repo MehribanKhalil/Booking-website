@@ -8,49 +8,42 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import TestimonialCard from "@/components/commonComponents/TestimonialCard";
 import './index.scss'
+import { useGetTestimonials } from "@/hooks/UseTestimonials";
+import Loader from "@/components/commonComponents/Loader";
 
 const FeedBackSection = () => {
+  const {data,isLoading,error} = useGetTestimonials()
+
+  if (isLoading) {
+    return <Loader/>;
+  }
+
+
+
+  console.log('testimonials',data);
+
+
   return (
     <section id="our-feedbacks " className=" wrapper section-space bg-[url('https://andit.co/projects/html/and-tour/demo/assets/img/common/test-bg.png')] bg-center bg-cover">
     
     <div className="feedbacks max-w-[600px] mx-auto py-10 ">
         
     <Swiper pagination={true}  loop='true' modules={[Pagination]} className="mySwiper min-h-[300px]">
-        <SwiperSlide>
-          <TestimonialCard
-            image='https://andit.co/projects/html/and-tour/demo/assets/img/common/testimonial.png'
-            title='Awesome service'
-            feedback="Loved the overall tour for all 6 days covering jaipur jodhpur and jaisalmer.
-            worth ur money for sure. thanks. Driver was very good and polite and safe
-            driving for all 6 days. on time pickup and drop overall. Thanks for it."
-            userName='Cameron douglas'
-            position='Businessman'
-          />
-        </SwiperSlide>
 
-        <SwiperSlide>
+      {
+        data?.map(testimonial=>(
+          <SwiperSlide key={testimonial._id}>
           <TestimonialCard
-            image='https://andit.co/projects/html/and-tour/demo/assets/img/common/testimonial.png'
-            title='Awesome service'
-            feedback="Loved the overall tour for all 6 days covering jaipur jodhpur and jaisalmer.
-            worth ur money for sure. thanks. Driver was very good and polite and safe
-            driving for all 6 days. on time pickup and drop overall. Thanks for it."
-            userName='Cameron douglas'
-            position='Businessman'
+            image={testimonial.image}
+            title={testimonial.title}
+            feedback={testimonial.description}
+            userName={testimonial.fullName}
+            position={testimonial.position}
           />
         </SwiperSlide>
+        ))
+      }
 
-        <SwiperSlide>
-          <TestimonialCard
-            image='https://andit.co/projects/html/and-tour/demo/assets/img/common/testimonial.png'
-            title='Awesome service'
-            feedback="Loved the overall tour for all 6 days covering jaipur jodhpur and jaisalmer.
-            worth ur money for sure. thanks. Driver was very good and polite and safe
-            driving for all 6 days. on time pickup and drop overall. Thanks for it."
-            userName='Cameron douglas'
-            position='Businessman'
-          />
-        </SwiperSlide>
         
       </Swiper>
     </div>

@@ -1,31 +1,32 @@
 import React from 'react'
 import './index.scss'
 import RecentPostCard from '../RecentPostCard'
+import Loader from '@/components/commonComponents/Loader'
 
-const NewsRecentPosts = () => {
+const NewsRecentPosts = ({data,isLoading}) => {
+  if(isLoading){
+    return <Loader/>
+  }
   return (
     <div>
-            <h2 className="class-h2  border-b-2 border-mainColor font-semibold m-0 pt-5 mb-10 ">
+            <h2 className="class-h2  border-b-2 border-gray-400 font-semibold m-0 pt-5 mb-10 ">
               RECENT POSTS
             </h2>
             <div className=' space-y-3'>
-            <RecentPostCard
-              recentPostImg='http://localhost:5175/src/assets/images/blog-img/recent-post1.jpg'
-              recentPostTitle="MAKE IT SIMPle"
 
-              recentPostDate="23.4.2023"
-              
-            />
-            <RecentPostCard
-              recentPostImg='http://localhost:5175/src/assets/images/blog-img/recent-post1.jpg'
-              recentPostTitle="COFFEE SHOP"
-              recentPostDate="13.2.2022"
-            />
-            <RecentPostCard
-              recentPostImg='http://localhost:5175/src/assets/images/blog-img/recent-post1.jpg'
-              recentPostTitle="COFFEE BAR"
-              recentPostDate="1.6.2023"
-            />
+              {
+                data.slice(0,3).map(blog=>(
+                  <RecentPostCard
+                  recentPostImg={blog.image}
+                  recentPostTitle={blog.title}
+    
+                  recentPostDate={blog.createdAt.toString().split("T")[0]}
+                  
+                />
+                ))
+              }
+           
+           
             </div>
           </div>
   )

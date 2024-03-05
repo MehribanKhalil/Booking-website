@@ -3,10 +3,14 @@ import { useGetCategories } from "@/hooks/UseCategories";
 import React, { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { BiSearchAlt } from "react-icons/bi";
+import useHotel from "@/hooks/user-hotel";
 
 
 const HotelSearchByName = () => {
   const [isOpen, setIsOpen] = useState(true);
+
+  const { search, setSearch } = useHotel()
+
 
   const toggleContent = () => {
     setIsOpen(!isOpen);
@@ -15,7 +19,7 @@ const HotelSearchByName = () => {
  
 
   return (
-    <div className="category-filter    border   border-mainColor  rounded-lg">
+    <div className="category-filter    border   border-gray-200  rounded-lg">
       <div
         className="filter-title cursor-pointer"
         onClick={() => toggleContent()}
@@ -37,7 +41,15 @@ const HotelSearchByName = () => {
         }`}
       >
       <div className="space-y-2 text-lg px-2 flex justify-center items-center text-gray-600 border border-gray-200 mx-2 my-3 ">
-        <input type="text" name="" id="" placeholder="e.g Palazzo"  className=" py-2  outline-none " />
+        <input
+            onChange={e => setSearch(e.target.value)}
+            type='text'
+            name=''
+            value={search}
+            id=''
+            placeholder='e.g Palazzo'
+            className=' py-2 px-3 outline-none'
+          />
         <BiSearchAlt className=" min-w-3"  />
       </div>
       </div>

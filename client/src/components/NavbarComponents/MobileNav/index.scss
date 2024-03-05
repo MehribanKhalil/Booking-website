@@ -1,0 +1,7 @@
+.mobileNav{
+    transition:  all .4s;
+    transform: translateX(300px);
+}
+.active{
+    transform: translateX(0) !important;
+}

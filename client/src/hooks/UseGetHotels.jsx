@@ -1,4 +1,4 @@
-import { deleteHotel, getHotelDetail } from "@/services/HotelsService";
+import { deleteHotel, getHotelDetail, getSimilarHotels } from "@/services/HotelsService";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useGetHotelDetail = (hotelId) => {
@@ -17,5 +17,14 @@ export const useDeleteHotel = () => {
     onSuccess: () => {
       queryClient.invalidateQueries(["hotels"]);
     }
+  });
+};
+
+
+//GET SIMILAR HOTELS
+export const useGetSimilarHotels = (hotelId) => {
+  return useQuery({
+    queryKey: ["similarHotel", hotelId],
+    queryFn: () => getSimilarHotels(hotelId),
   });
 };
