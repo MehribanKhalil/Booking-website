@@ -3,9 +3,8 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import {v2 as cloudinary} from "cloudinary";
-import { notFound, errorHandler } from './src/middleware/errorHandling.js';
-
+import { v2 as cloudinary } from "cloudinary";
+import { notFound, errorHandler } from "./src/middleware/errorHandling.js";
 
 //ROUTES
 import authRouter from "./src/routes/authRoute.js";
@@ -22,15 +21,18 @@ const app = express();
 
 //Middleware
 app.use(express.json());
-app.use(cors({
-  origin: ['http://localhost:5173', 'https://booking-website-wvdj.onrender.com'],
-  credentials:true
-}));
-app.use(cookieParser())
-
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://booking-website-six-eta.vercel.app",
+    ],
+    credentials: true,
+  })
+);
+app.use(cookieParser());
 
 dotenv.config();
-
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
@@ -47,7 +49,6 @@ app.use("/api", reviews);
 app.use("/api", testimonials);
 app.use("/api", blogs);
 app.use("/api", tags);
-
 
 const port = process.env.PORT || 5000;
 const url = process.env.CONNECTION_URL.replace(
