@@ -9,6 +9,8 @@ const generateToken = (res, user) => {
     }
   );
 
+  console.log(process.env.NODE_ENV === "production")
+
   res.cookie("access_token", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV !== "development",
